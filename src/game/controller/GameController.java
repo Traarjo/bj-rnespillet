@@ -191,7 +191,7 @@ public class GameController {
         List<Integer> yValuesBee = Arrays.asList(250, 400, 550);
         double yForNewBee = yValuesBee.get(random.nextInt(3));
 
-        if(bees.size() < 6 && bees.stream()
+        if(bees.size() < 3 && bees.stream()
                 .noneMatch(bee -> bee.getxPosition()
                         == xForNewBee && bee.getyPosition() == yForNewBee)) {
             bees.add(new Bee(beeImage.getWidth(),beeImage.getHeight(), yForNewBee, xForNewBee));
