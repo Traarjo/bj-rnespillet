@@ -1,5 +1,6 @@
 package game.view;
 
+import game.model.GameState;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -7,6 +8,7 @@ import game.controller.GameController;
 
 public class MainMenu extends MenuBar {
     private Menu fileMenu;
+    private MenuItem newGameItem;
     private MenuItem pauseResumeItem;
     private MenuItem exit;
     private Menu helpMenu;
@@ -14,11 +16,20 @@ public class MainMenu extends MenuBar {
 
     public MainMenu(GameController gameController) {
         fileMenu = new Menu("Fil");
+        newGameItem = new MenuItem("Nytt spill");
         pauseResumeItem = new MenuItem("Pause");
+
+        newGameItem.setOnAction(e -> {
+            e.consume();
+            gameController.newGame();
+        });
+
         pauseResumeItem.setOnAction(e -> {
             e.consume();
-            if(!gameController.isPaused().get()){
+            if(!gameController.isPaused()){
                 gameController.pause();
+                new GameMenu(gameController, true);
+
             }
             else{
                 gameController.resume();
@@ -26,8 +37,8 @@ public class MainMenu extends MenuBar {
 
 
         });
-        gameController.isPaused().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
+        gameController.getState().addListener((observable, oldValue, newValue) -> {
+            if (newValue.equals(GameState.PAUSED.toString())) {
                 pauseResumeItem.setText("Fortsett");
             } else {
                 pauseResumeItem.setText("Pause");
@@ -42,7 +53,7 @@ public class MainMenu extends MenuBar {
             gameController.exit();
         });
 
-        fileMenu.getItems().addAll(pauseResumeItem, exit);
+        fileMenu.getItems().addAll(newGameItem, pauseResumeItem, exit);
 
 
         helpMenu = new Menu("Hjelp");

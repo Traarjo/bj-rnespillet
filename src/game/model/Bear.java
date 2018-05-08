@@ -12,7 +12,7 @@ public class Bear {
         this.xPosition = 100;
         this.yPosition = 500;
         this.eatenHoney = 0;
-        this.lives = 3;
+        this.lives = 8;
         this.width = width;
         this.height = height;
     }
@@ -48,23 +48,14 @@ public class Bear {
 
     public boolean checkIfGotStungBy(Bee bee) {
         if (xAxisIsInRange(bee.getxPosition(), bee.getWidth()) && yAxisIsInRange(bee.getyPosition(), bee.getHeight())) {
-            bee.setLastStungTime(System.currentTimeMillis());
-            lives = lives--;
-            return true;
+            lives = lives-1;
+           return true;
 
         }
         return false;
     }
 
 
-   /* public boolean isGameOver() {
-        if (livesLeft() = 0) {
-            System.out.println("Game over");
-            return true;
-        }
-
-        return false;
-    }  */
 
     public boolean ateHoney(Honey honey) {
         if (xAxisIsInRange(honey.getxPosition(), honey.getWidth()) && yAxisIsInRange(honey.getyPosition(), honey.getHeight())) {

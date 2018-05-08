@@ -5,7 +5,6 @@ public class Bee {
     private double yPosition;
     private double width;
     private double height;
-    private long lastStungTime = 0;
 
     public Bee(double width, double height, double yPosition, double xPosition) {
         this.xPosition = xPosition;
@@ -39,16 +38,8 @@ public class Bee {
         return height;
     }
 
-
     public double horizontalStepLength() {
         return width / 10;
     }
 
-    public long lastStungTime() {
-        return lastStungTime;
-    }
-
-    public void setLastStungTime(long timestamp){
-        this.lastStungTime = timestamp;
-    }
 }
