@@ -15,7 +15,6 @@ public class Bear {
         this.lives = 3;
         this.width = width;
         this.height = height;
-
     }
 
     public double getxPosition() {

@@ -121,7 +121,6 @@ public class GameController {
 
 
    public void moveBearUp() {
-
         double current = bear.getyPosition();
         double newPosition = current - bear.verticalStepLength();
         if (newPosition > 0) {
@@ -143,7 +142,6 @@ public class GameController {
         if (newPosition <= (Size.height - bear.verticalStepLength())) {
             bear.setyPosition(newPosition);
         }
-
     }
 
     public void moveBearRight() {
@@ -152,7 +150,6 @@ public class GameController {
         if (newPosition < (width - bear.getWidth())) {
             bear.setxPosition(newPosition);
         }
-
     }
 
 
