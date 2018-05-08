@@ -1,5 +1,8 @@
 package game.model;
 
+import game.view.Size;
+import javafx.scene.image.Image;
+
 public class Bear {
     private int eatenHoney;
     private int lives;
@@ -7,10 +10,14 @@ public class Bear {
     private double yPosition;
     private double width;
     private double height;
+    Image bear_img = new Image("bilder/B1Preview.png", windowWidth / 6, windowHeight / 5, true, false);
+    private static double windowWidth = Size.width();
+    private static double windowHeight = Size.height();
+
 
     public Bear(double width, double height) {
-        this.xPosition = 100;
-        this.yPosition = 500;
+        this.xPosition = bear_img.getWidth() * 2;
+        this.yPosition = bear_img.getHeight() * 2.5;
         this.eatenHoney = 0;
         this.lives = 8;
         this.width = width;
