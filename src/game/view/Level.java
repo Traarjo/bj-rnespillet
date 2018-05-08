@@ -17,6 +17,9 @@ public class Level extends Pane {
     private GraphicsContext gc;
     private AnimationTimer timer;
 
+    private static double windowWidth = Size.width();
+    private static double windowHeight = Size.height();
+
 
     public Level(GameController gameController, Image bearImage, Image beeImage, Image honeyImage) {
         this.gameController = gameController;
@@ -24,7 +27,7 @@ public class Level extends Pane {
         this.beeImage = beeImage;
         this.honeyImage = honeyImage;
         setId("level");
-        Canvas canvas = new Canvas(1200, 1000);
+        Canvas canvas = new Canvas(windowWidth, windowHeight);
         gc = canvas.getGraphicsContext2D();
         getChildren().addAll(createTrees(), canvas);
 

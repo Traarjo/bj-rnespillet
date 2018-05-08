@@ -1,10 +1,14 @@
 package game;
 
 import game.view.Size;
+import javafx.animation.Animation;
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
@@ -13,6 +17,7 @@ import game.controller.GameController;
 import game.view.Level;
 import game.view.MainMenu;
 import game.view.Tutorial;
+import javafx.util.Duration;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +28,19 @@ public class GameApplication extends Application {
     private Image bearImage;
     private Image beeImage;
     private Image honeyImage;
+
+    Image bear_img = new Image("bilder/B1Preview.png", windowWidth / 6, windowHeight / 5, true, false);
+    private static double windowWidth = Size.width();
+    private static double windowHeight = Size.height();
+
+    private static final Image IMAGE = new Image("bilder/bjornar.png");
+
+    private static final int COLUMNS  =  5;
+    private static final int COUNT    =  2;
+    private static final int OFFSET_X =  0;
+    private static final int OFFSET_Y =  0;
+    private static final int WIDTH    = 200;
+    private static final int HEIGHT   = 271;
 
 
     public GameApplication() {
@@ -59,6 +77,23 @@ public class GameApplication extends Application {
             gameController.exit();
         });
 
+
+        final ImageView imageView = new ImageView(IMAGE);
+        imageView.setViewport(new Rectangle2D(OFFSET_X, OFFSET_Y, WIDTH, HEIGHT));
+
+        final Animation animation = new SpriteAnimation(
+                imageView,
+                Duration.millis(1000),
+                COUNT, COLUMNS,
+                OFFSET_X, OFFSET_Y,
+                WIDTH, HEIGHT
+        );
+        animation.setCycleCount(Animation.INDEFINITE);
+        animation.play();
+
+        //stage.setScene(new Scene(new Group(imageView)));
+        imageView.relocate(bear_img.getWidth() * 2, bear_img.getHeight() * 2.5);
+        borderPane.getChildren().add(imageView);
         stage.setResizable(false);
         stage.show();
         new Tutorial();
