@@ -8,11 +8,13 @@ import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import game.controller.GameController;
 import javafx.util.Duration;
@@ -29,6 +31,7 @@ public class GameApplication extends Application {
     private Image beeImage;
     private Image honeyImage;
     private Image bearImage2;
+    private Image heartImage;
 
 
     private static double windowWidth = Size.width();
@@ -50,12 +53,20 @@ public class GameApplication extends Application {
         beeImage = new Image("bilder/bie.png", Size.width / 10, Size.height / 8, true, false);
         honeyImage = new Image("bilder/honey.png", Size.width / 13, Size.height / 8, true, false);
         this.gameController = new GameController(bearImage, beeImage, honeyImage);
+        heartImage = new Image("bilder/hjerte.png", Size.width / 13, Size.height / 8, true, false);
 
     }
 
 
     @Override
     public void start(Stage stage) throws Exception {
+        /*VBox vBox = new VBox();
+        Image heartImage = new Image("bilder/hjerte.png");
+        Label label1 = new Label("Liv");
+        label1.setGraphic(new ImageView(heartImage));
+        vBox.getChildren().add(label1);*/
+
+
         BorderPane borderPane = new BorderPane();
         borderPane.setTop(new MainMenu(gameController));
         borderPane.setCenter(new Level(gameController, bearImage, beeImage, honeyImage, bearImage2));
