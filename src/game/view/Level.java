@@ -80,7 +80,7 @@ public class Level extends Pane {
     }
 
     private void render() {
-        gc.clearRect(0, 0, 1200, 1000);
+        gc.clearRect(0, 0, windowWidth, windowHeight);
         Bear bear = gameController.getBear();
 
         gc.drawImage(renderImage, bear.getxPosition(), bear.getyPosition(), bear.getWidth(), bear.getHeight());

@@ -2,8 +2,7 @@ package game.controller;
 
 import game.model.GameState;
 import game.view.Size;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
