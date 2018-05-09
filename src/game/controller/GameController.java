@@ -1,6 +1,7 @@
 package game.controller;
 
 import game.model.GameState;
+import game.view.Level;
 import game.view.Size;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -29,6 +30,8 @@ public class GameController {
     private Image bearImage;
     private Image beeImage;
     private Image honeyImage;
+    private static double windowWidth = Size.width();
+    private static double windowHeight = Size.height();
 
 
     public GameController(Image bearImage, Image beeImage, Image honeyImage) {
@@ -101,11 +104,11 @@ public class GameController {
             while (state.get().equals(GameState.RUNNING.toString())) {
                 bees.forEach(bee -> {
                         double currentPos = bee.getxPosition();
-                        double newPosition = currentPos + bee.horizontalStepLength();
-                        if (newPosition < width) {
+                        double newPosition = currentPos - bee.horizontalStepLength();
+                        if (newPosition > -beeImage.getWidth()) {
                             bee.setxPosition(newPosition);
                         } else {
-                            bee.setxPosition(0);
+                            bee.setxPosition(windowWidth+beeImage.getWidth());
                         }
                 });
                 try {

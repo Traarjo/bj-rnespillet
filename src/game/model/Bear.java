@@ -99,7 +99,7 @@ public class Bear {
     }
 
     public double horizontalStepLength() {
-        return width / 6;
+        return width / 5;
     }
 
     public double verticalStepLength() {

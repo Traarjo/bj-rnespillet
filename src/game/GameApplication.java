@@ -45,8 +45,8 @@ public class GameApplication extends Application {
 
 
     public GameApplication() {
-        bearImage = new Image("bilder/B1Preview.png", Size.width / 6, Size.height / 5, true, false);
-        bearImage2 = new Image("bilder/B8Preview.png", Size.width / 6, Size.height / 5, true, false);
+        bearImage = new Image("bilder/B1R.png", Size.width / 6, Size.height / 5, true, false);
+        bearImage2 = new Image("bilder/B1R2.png", Size.width / 6, Size.height / 5, true, false);
         beeImage = new Image("bilder/bie.png", Size.width / 10, Size.height / 8, true, false);
         honeyImage = new Image("bilder/honey.png", Size.width / 13, Size.height / 8, true, false);
         this.gameController = new GameController(bearImage, beeImage, honeyImage);

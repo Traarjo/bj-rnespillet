@@ -12,6 +12,11 @@ import javafx.scene.layout.Pane;
 import game.controller.GameController;
 import game.model.Bear;
 
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
+
+import static java.lang.Thread.sleep;
+
 public class Level extends Pane {
     private GameController gameController;
     private Image bearImage;
@@ -21,6 +26,9 @@ public class Level extends Pane {
     private GraphicsContext gc;
     private AnimationTimer timer;
     private Image renderImage;
+    private Thread run = run();
+
+
 
     private static double windowWidth = Size.width();
     private static double windowHeight = Size.height();
@@ -84,20 +92,34 @@ public class Level extends Pane {
         Bear bear = gameController.getBear();
 
         gc.drawImage(renderImage, bear.getxPosition(), bear.getyPosition(), bear.getWidth(), bear.getHeight());
-        setNextBearRenderImage();
+        run();
         gameController.getBees().forEach(bee -> gc.drawImage(beeImage, bee.getxPosition(), bee.getyPosition(), bee.getWidth(), bee.getHeight()));
         gameController.getHoneyPots().forEach(honey -> gc.drawImage(honeyImage, honey.getxPosition(), honey.getyPosition(), honey.getWidth(), honey.getHeight()));
+        run().start();
+    }
+    public Thread run() {
+        return new Thread(() ->
+        {
+            if (renderImage == bearImage) {
+               try {
+                    run.sleep(100);
+                   renderImage = bearImage2;
+                } catch (InterruptedException ignored) {
+                }
+
+            } else {
+                try {
+                    run.sleep(100);
+                    renderImage = bearImage;
+                } catch (InterruptedException ignored) {
+                }
+            }
+
+        });
 
     }
 
-    private void setNextBearRenderImage() {
-        if(renderImage == bearImage){
-            renderImage = bearImage2;
-        }
-        else{
-            renderImage = bearImage;
-        }
-    }
+
 
 
 }
