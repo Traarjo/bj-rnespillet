@@ -166,6 +166,8 @@ public class GameController {
             System.out.println("to liv");
         } else if (bear.getLives() == 1) {
             System.out.println("et liv");
+        } else {
+            System.out.println("null liv");
         }
 
         if(isGameOver()){
@@ -175,25 +177,17 @@ public class GameController {
         else {
             scoreText();
             Random random = new Random();
-            /*List<Integer> xValues = Arrays.asList(30, 300, 450, 600, 750, 870);
-            double xForNewHoney = xValues.get(random.nextInt(6));*/
 
             double lane1 = bear.startPosition() - bear.verticalStepLength();
             double lane2 = bear.startPosition();
             double lane3 = bear.startPosition() + bear.verticalStepLength();
 
-            /*List<Integer> yValues = Arrays.asList((int)lane1, (int)lane2, (int)lane3);
-            double yForNewHoney = yValues.get(random.nextInt(3));
-
-            if (honeyPots.size() < 6 && honeyPots.stream()
-                    .noneMatch(honey -> honey.getxPosition() == xForNewHoney && honey.getyPosition() == yForNewHoney)) {
-                honeyPots.add(new Honey(honeyImage.getWidth(), honeyImage.getHeight(), yForNewHoney, xForNewHoney));
-            }*/
 
             List<Integer> xValuesBee = Arrays.asList(20, 200, 350, 500, 650, 770);
-            double xForNewBee = xValuesBee.get(random.nextInt(6))+(int)windowWidth;
-
             List<Integer> yValuesBee = Arrays.asList((int)lane1, (int)lane2, (int)lane3);
+
+            //Bier
+            double xForNewBee = xValuesBee.get(random.nextInt(6))+(int)windowWidth;
             double yForNewBee = yValuesBee.get(random.nextInt(3));
 
             if (bees.size() < 3 && bees.stream()
@@ -201,11 +195,11 @@ public class GameController {
                 bees.add(new Bee(beeImage.getWidth(), beeImage.getHeight(), yForNewBee, xForNewBee));
             }
 
-            //honning
+            //Honning
             double xForNewHoney = xValuesBee.get(random.nextInt(6))+(int)windowWidth;
             double yForNewHoney = yValuesBee.get(random.nextInt(3));
 
-            if (honeyPots.size() < 3 && honeyPots.stream()
+            if (honeyPots.size() < 4 && honeyPots.stream()
                     .noneMatch(honey -> honey.getxPosition() == xForNewHoney && honey.getyPosition() == yForNewHoney)) {
                 honeyPots.add(new Honey(honeyImage.getWidth(), honeyImage.getHeight(), yForNewHoney, xForNewHoney));
             }
