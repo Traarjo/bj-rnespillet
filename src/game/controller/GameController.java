@@ -36,7 +36,7 @@ public class GameController {
     private int points = 0;
 
     public Text score = new Text();
-    Pane pane = new Pane();
+    BorderPane borderPane = new BorderPane();
 
     public GameController(Image bearImage, Image beeImage, Image honeyImage) {
         this.bearImage = bearImage;
@@ -158,6 +158,7 @@ public class GameController {
          return bear.getLives() <= 0;
     }
 
+    //dele opp denne?
     public  synchronized void updateGameState() {
         if (bear.getLives() == 3) {
             System.out.println("tre liv");
@@ -227,8 +228,8 @@ public class GameController {
         }
     }
 
-    public void drawScore(Pane pane){
-        pane.getChildren().add(score);
+    public void drawScore(BorderPane borderPane){
+        borderPane.getChildren().add(score);
         score.setTranslateX(500);
         score.setTranslateY(500);
 
@@ -251,7 +252,7 @@ public class GameController {
         state.setValue(GameState.RUNNING.toString());
         beeMover.start();
         honeyMover.start();
-        drawScore(pane);
+        drawScore(borderPane);
     }
     public boolean isPaused() {
         return state.get().equals(GameState.PAUSED.toString());

@@ -40,18 +40,6 @@ public class GameApplication extends Application {
     private Bear bear;
 
 
-    private static double windowWidth = Size.width();
-    private static double windowHeight = Size.height();
-
-    private static final Image IMAGE = new Image("bilder/bjornar.png");
-
-    private static final int COLUMNS  =  5;
-    private static final int COUNT    =  2;
-    private static final int OFFSET_X =  0;
-    private static final int OFFSET_Y =  0;
-    private static final int WIDTH    = 200;
-    private static final int HEIGHT   = 271;
-
     public GameApplication() {
         bearImage = new Image("bilder/B1R.png", Size.windowwidth / 6, Size.windowheight / 5, true, false);
         bearImage2 = new Image("bilder/B1R2.png", Size.windowwidth / 6, Size.windowheight / 5, true, false);
@@ -62,8 +50,9 @@ public class GameApplication extends Application {
 
 
         /*if(bear.getEatenHoney() >= 10){
-            bearImage = new Image("bilder/B2R.png", Size.width / 6, Size.height / 5, true, false);
-            bearImage2 = new Image("bilder/B2R2.png", Size.width / 6, Size.height / 5, true, false);
+            bearImage = new Image("bilder/B2R.png", Size.windowwidth / 6, Size.windowheight / 5, true, false);
+            bearImage2 = new Image("bilder/B2R2.png", Size.windowwidth / 6, Size.windowheight / 5, true, false);
+            System.out.println("nybjørn");
         }*/
     }
 
@@ -77,7 +66,7 @@ public class GameApplication extends Application {
         BorderPane borderPane = new BorderPane();
         VBox pane2 = new VBox();
         pane2.getChildren().add(new MainMenu(gameController));
-        pane2.getChildren().add(new Text("Score: "));
+        pane2.getChildren().add(new Text("Score: ")); //GameController.score? scoreText() ? drawScore() ?
         borderPane.setTop(pane2);
         //borderPane.setTop(new MainMenu(gameController));
         borderPane.setCenter(new Level(gameController, bearImage, beeImage, honeyImage, bearImage2));

@@ -3,6 +3,9 @@ package game.model;
 import game.view.Size;
 import javafx.scene.image.Image;
 
+/**
+ *
+ */
 public class Bear {
     public int eatenHoney = 0;
     private int lives;
