@@ -110,7 +110,6 @@ public class GameController {
                     }
                 });
                 try {
-                    //Let the bees sleep after each movement
                     Thread.sleep(10);
                 } catch (InterruptedException ignored) {}
             }
