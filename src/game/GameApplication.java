@@ -120,6 +120,10 @@ public class GameApplication extends Application {
                         gameController.pause();
                         new GameMenu(gameController, true);
                         break;
+                    case SPACE:
+                        gameController.pause();
+                        new GameMenu(gameController, true);
+                        break;
                 }
             }
         };
