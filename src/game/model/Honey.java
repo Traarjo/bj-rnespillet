@@ -33,4 +33,8 @@ public class Honey {
     public double getHeight() {
         return height;
     }
+
+    public double horizontalStepLength() {
+        return width / 40;
+    }
 }

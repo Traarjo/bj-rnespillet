@@ -36,6 +36,6 @@ public class Bee {
     }
 
     public double horizontalStepLength() {
-        return width / 10;
+        return width / 40;
     }
 }
