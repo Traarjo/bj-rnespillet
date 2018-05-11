@@ -65,7 +65,6 @@ public class GameApplication extends Application {
             bearImage = new Image("bilder/B2R.png", Size.width / 6, Size.height / 5, true, false);
             bearImage2 = new Image("bilder/B2R2.png", Size.width / 6, Size.height / 5, true, false);
         }*/
-        heartImage = new Image("bilder/hjerte.png", Size.width / 13, Size.height / 8, true, false);
     }
 
     @Override
