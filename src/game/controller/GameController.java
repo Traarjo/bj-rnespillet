@@ -1,6 +1,7 @@
 package game.controller;
 
 import game.model.GameState;
+import game.view.GameMenu;
 import game.view.Level;
 import game.view.Size;
 
@@ -29,35 +30,31 @@ public class GameController {
     private Image bearImage;
     private Image beeImage;
     private Image honeyImage;
+    private Image heartImage;
 
 
-    public GameController(Image bearImage, Image beeImage, Image honeyImage) {
+    public GameController(Image bearImage, Image beeImage, Image honeyImage, Image heartImage) {
         this.bearImage = bearImage;
         this.beeImage = beeImage;
         this.honeyImage = honeyImage;
+        this.heartImage = heartImage;
     }
 
     private void createBees(double width, double height) {
         bees.add(new Bee(width, height, 200, Math.random()*50.0));
         //bees.add(new Bee(width, height, 350, Math.random()*100.0));
         //bees.add(new Bee(width, height, 500, Math.random()*150.0));
-
-  }
-
+    }
 
     private void createHoneyPots(double width, double height) {
         honeyPots.add(new Honey(width, height, 250, Math.random()*500.0));
        // honeyPots.add(new Honey(width, height, 400, Math.random()*500.0));
         // honeyPots.add(new Honey(width, height, 550, Math.random()*500.0));
-
     }
-
-
 
     public void pause() {
         beeMover.interrupt();
         state.setValue(GameState.PAUSED.toString());
-
     }
 
     public void resume() {
@@ -65,10 +62,7 @@ public class GameController {
             beeMover = beeMover();
             beeMover.start();
             state.setValue(GameState.RUNNING.toString());
-
         }
-
-
     }
 
     public StringProperty getState() {
@@ -78,16 +72,13 @@ public class GameController {
     public void exit() {
         if(!isPaused()){
             pause();
-
-
         }
         saveGameState();
         System.exit(0);
-
     }
 
     private void saveGameState() {
-
+        //TODO: Lage?
     }
 
     public Bear getBear() {
@@ -97,7 +88,6 @@ public class GameController {
     private Thread beeMover() {
         return new Thread(() ->
         {
-
             while (state.get().equals(GameState.RUNNING.toString())) {
                 bees.forEach(bee -> {
                         double currentPos = bee.getxPosition();
@@ -114,10 +104,8 @@ public class GameController {
                 } catch (InterruptedException ignored) {
                 }
             }
-
         });
     }
-
 
    public void moveBearUp() {
         double current = bear.getyPosition();
@@ -125,8 +113,7 @@ public class GameController {
         if (newPosition > 0) {
             bear.setyPosition(newPosition);
         }
-    }
-
+   }
     public void moveBearLeft() {
         double current = bear.getxPosition();
         double newPosition = current - bear.horizontalStepLength();
@@ -134,7 +121,6 @@ public class GameController {
             bear.setxPosition(newPosition);
         }
     }
-
     public void moveBearDown() {
         double current = bear.getyPosition();
         double newPosition = current + bear.verticalStepLength();
@@ -142,7 +128,6 @@ public class GameController {
             bear.setyPosition(newPosition);
         }
     }
-
     public void moveBearRight() {
         double current = bear.getxPosition();
         double newPosition = current + bear.horizontalStepLength();
@@ -152,23 +137,29 @@ public class GameController {
     }
 
     public List<Honey> getHoneyPots() {
-
         return honeyPots;
     }
 
     public List<Bee> getBees() {
-
         return bees;
     }
 
     public boolean isGameOver(){
          return bear.getLives() <= 0;
-
     }
 
     public  synchronized void updateGameState() {
+        if (bear.getLives() == 3) {
+            System.out.println("tre liv");
+        } else if (bear.getLives() == 2) {
+            System.out.println("to liv");
+        } else if (bear.getLives() == 1) {
+            System.out.println("et liv");
+        }
+
         if(isGameOver()){
           pause();
+            new GameMenu(this, true);
         }
         else {
             Random random = new Random();
@@ -223,14 +214,7 @@ public class GameController {
         state.setValue(GameState.NEW_LEVEL.toString());
         state.setValue(GameState.RUNNING.toString());
         beeMover.start();
-
-
-
-
-
     }
-
-
     public boolean isPaused() {
         return state.get().equals(GameState.PAUSED.toString());
     }

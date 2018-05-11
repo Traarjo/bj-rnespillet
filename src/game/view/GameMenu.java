@@ -30,17 +30,11 @@ public class GameMenu {
         vbox = new VBox();
         //                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
 
-        newGameButton = new Button();
-        galleryButton = new Button();
-        scoreboardButton = new Button();
-        quitButton = new Button();
+        newGameButton = new Button("Nytt spill");
+        galleryButton = new Button("Galleri");
+        scoreboardButton = new Button("Poengtavle");
+        quitButton = new Button("Avslutt");
 
-
-
-        newGameButton.setText("Nytt spill");
-        galleryButton.setText("Galleri");
-        scoreboardButton.setText("Poengtavle");
-        quitButton.setText("Avslutt");
         quitButton.setFont(new Font("arial", 14));
 
         newGameButton.setOnAction(e -> {
@@ -66,18 +60,16 @@ public class GameMenu {
             gameController.exit();
         });
         if(canResumeGame){
-            Button continiueGameButton = new Button();
-            continiueGameButton.setText("Fortsett");
-            continiueGameButton.setOnAction(e -> {
+            Button continueGameButton = new Button("Fortsett");
+            continueGameButton.setOnAction(e -> {
                 e.consume();
                 stage.close();
                 gameController.resume();
             });
-            vbox.getChildren().add(continiueGameButton);
+            vbox.getChildren().add(continueGameButton);
         }
         vbox.getChildren().addAll(newGameButton, galleryButton, scoreboardButton,quitButton);
         stage.setScene(new Scene(vbox));
         stage.show();
     }
-
 }

@@ -29,7 +29,6 @@ public class MainMenu extends MenuBar {
             if(!gameController.isPaused()){
                 gameController.pause();
                 new GameMenu(gameController, true);
-
             }
             else{
                 gameController.resume();

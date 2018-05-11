@@ -28,7 +28,7 @@ public class Bear {
     public double getxPosition() {
         return xPosition;
     }
-    
+
     public void setyPosition(double yPosition) {
         this.yPosition = yPosition;
     }
