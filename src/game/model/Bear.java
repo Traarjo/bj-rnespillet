@@ -10,33 +10,29 @@ public class Bear {
     private double yPosition;
     private double width;
     private double height;
-    Image bear_img = new Image("bilder/B1Preview.png", windowWidth / 6, windowHeight / 5, true, false);
-    private static double windowWidth = Size.width();
-    private static double windowHeight = Size.height();
-
+    Image bear_img = new Image("bilder/B1Preview.png", Size.windowwidth / 6, Size.windowheight / 5, true, false);
 
     public Bear(double width, double height) {
         this.xPosition = bear_img.getWidth() * 2;
         this.yPosition = bear_img.getHeight() * 2.5;
-        this.lives = 8;
+        this.eatenHoney = 0;
+        this.lives = 3;
         this.width = width;
         this.height = height;
-    }
-
-    public double getxPosition() {
-        return xPosition;
     }
 
     public void setxPosition(double xPosition) {
         this.xPosition = xPosition;
     }
-
-    public double getyPosition() {
-        return yPosition;
+    public double getxPosition() {
+        return xPosition;
     }
 
     public void setyPosition(double yPosition) {
         this.yPosition = yPosition;
+    }
+    public double getyPosition() {
+        return yPosition;
     }
 
     public int getEatenHoney() {
@@ -49,16 +45,14 @@ public class Bear {
         return lives;
     }
 
-    public void setLives(int lives) {
+    /*public void setLives(int lives) {
         this.lives = lives;
-    }
-
+    }*/
 
     public boolean checkIfGotStungBy(Bee bee) {
         if (xAxisIsInRange(bee.getxPosition(), bee.getWidth()) && yAxisIsInRange(bee.getyPosition(), bee.getHeight())) {
-            lives = lives-1;
+            lives--;
            return true;
-
         }
         return false;
     }
@@ -69,9 +63,7 @@ public class Bear {
             setEatenHoney(getEatenHoney()+1);
             System.out.println("Score: " + eatenHoney);
             return true;
-
         }
-
         return false;
     }
 
@@ -82,7 +74,6 @@ public class Bear {
                 || isInRange(xPosition, objectXPosition, highestObjectX)
                 || isInRange(highestX, objectXPosition, highestObjectX);
     }
-
     private boolean yAxisIsInRange(double objectYPosition, double objectHeight) {
         double highestY = this.yPosition + getHeight();
         double highestObjectY = objectYPosition + objectHeight;
@@ -90,25 +81,20 @@ public class Bear {
                 || isInRange(yPosition, objectYPosition, highestObjectY)
                 || isInRange(highestY, objectYPosition, highestObjectY);
     }
+    private boolean isInRange(double val, double lowest, double highest) {
+        return val >= lowest && val <= highest;
+    }
 
     public double getWidth() {
         return width;
     }
-
     public double getHeight() {
         return height;
     }
-
     public double horizontalStepLength() {
         return width / 5;
     }
-
     public double verticalStepLength() {
         return height * 1.25;
-    }
-
-    private boolean isInRange(double val, double lowest, double highest) {
-
-        return val >= lowest && val <= highest;
     }
 }

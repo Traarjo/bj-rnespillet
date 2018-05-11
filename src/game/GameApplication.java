@@ -40,7 +40,6 @@ public class GameApplication extends Application {
     private Bear bear;
 
 
-
     private static double windowWidth = Size.width();
     private static double windowHeight = Size.height();
 
@@ -53,20 +52,20 @@ public class GameApplication extends Application {
     private static final int WIDTH    = 200;
     private static final int HEIGHT   = 271;
 
-
     public GameApplication() {
-        bearImage = new Image("bilder/B1R.png", Size.width / 6, Size.height / 5, true, false);
-        bearImage2 = new Image("bilder/B1R2.png", Size.width / 6, Size.height / 5, true, false);
-        beeImage = new Image("bilder/bie.png", Size.width / 10, Size.height / 8, true, false);
-        honeyImage = new Image("bilder/honey.png", Size.width / 13, Size.height / 8, true, false);
+        bearImage = new Image("bilder/B1R.png", Size.windowwidth / 6, Size.windowheight / 5, true, false);
+        bearImage2 = new Image("bilder/B1R2.png", Size.windowwidth / 6, Size.windowheight / 5, true, false);
+        beeImage = new Image("bilder/bie.png", Size.windowwidth / 10, Size.windowheight / 8, true, false);
+        honeyImage = new Image("bilder/honey.png", Size.windowwidth / 13, Size.windowheight / 8, true, false);
+        heartImage = new Image("bilder/hjerte.png", Size.windowwidth / 13, Size.windowheight / 8, true, false);
         this.gameController = new GameController(bearImage, beeImage, honeyImage);
-        heartImage = new Image("bilder/hjerte.png", Size.width / 13, Size.height / 8, true, false);
 
 
         /*if(bear.getEatenHoney() >= 10){
             bearImage = new Image("bilder/B2R.png", Size.width / 6, Size.height / 5, true, false);
             bearImage2 = new Image("bilder/B2R2.png", Size.width / 6, Size.height / 5, true, false);
         }*/
+        heartImage = new Image("bilder/hjerte.png", Size.width / 13, Size.height / 8, true, false);
     }
 
     @Override
@@ -83,7 +82,7 @@ public class GameApplication extends Application {
         borderPane.setTop(pane2);
         //borderPane.setTop(new MainMenu(gameController));
         borderPane.setCenter(new Level(gameController, bearImage, beeImage, honeyImage, bearImage2));
-        Scene scene = new Scene(borderPane, Size.width, Size.height);
+        Scene scene = new Scene(borderPane, Size.windowwidth, Size.windowheight);
         scene.setOnKeyPressed(keyhandler());
         scene.getStylesheets().add("Stylesheet.css");
         stage.setScene(scene);
@@ -97,13 +96,7 @@ public class GameApplication extends Application {
         stage.setResizable(false);
         stage.show();
 
-
         new GameMenu(gameController, false);
-
-
-
-
-
     }
 
     private EventHandler<KeyEvent> keyhandler() {
@@ -127,13 +120,9 @@ public class GameApplication extends Application {
                     case ESCAPE:
                         gameController.pause();
                         new GameMenu(gameController, true);
-
                         break;
                 }
-
             }
-
         };
     }
-
 }

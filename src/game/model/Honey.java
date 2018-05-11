@@ -13,27 +13,23 @@ public class Honey {
         this.height = height;
     }
 
-    public double getxPosition() {
-        return xPosition;
-    }
-
     public void setxPosition(double xPosition) {
         this.xPosition = xPosition;
     }
-
-    public double getyPosition() {
-        return yPosition;
+    public double getxPosition() {
+        return xPosition;
     }
 
     public void setyPosition(double yPosition) {
         this.yPosition = yPosition;
     }
-
+    public double getyPosition() {
+        return yPosition;
+    }
 
     public double getWidth() {
         return width;
     }
-
     public double getHeight() {
         return height;
     }

@@ -2,6 +2,7 @@ package game.controller;
 
 import game.GameApplication;
 import game.model.GameState;
+import game.view.GameMenu;
 import game.view.Size;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -20,12 +21,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static game.view.Size.width;
-
 public class GameController {
     private Bear bear;
     private StringProperty state = new SimpleStringProperty(GameState.PAUSED.toString());
-
     private List<Bee> bees = new ArrayList<>();
     private List<Honey> honeyPots = new ArrayList<>();
     private Thread beeMover;
@@ -39,7 +37,6 @@ public class GameController {
     public Text score = new Text();
     Pane pane = new Pane();
 
-
     public GameController(Image bearImage, Image beeImage, Image honeyImage) {
         this.bearImage = bearImage;
         this.beeImage = beeImage;
@@ -50,23 +47,17 @@ public class GameController {
         bees.add(new Bee(width, height, 200, Math.random()*50.0));
         //bees.add(new Bee(width, height, 350, Math.random()*100.0));
         //bees.add(new Bee(width, height, 500, Math.random()*150.0));
-
-  }
-
+    }
 
     private void createHoneyPots(double width, double height) {
         honeyPots.add(new Honey(width, height, 250, Math.random()*500.0));
        // honeyPots.add(new Honey(width, height, 400, Math.random()*500.0));
         // honeyPots.add(new Honey(width, height, 550, Math.random()*500.0));
-
     }
-
-
 
     public void pause() {
         beeMover.interrupt();
         state.setValue(GameState.PAUSED.toString());
-
     }
 
     public void resume() {
@@ -74,10 +65,7 @@ public class GameController {
             beeMover = beeMover();
             beeMover.start();
             state.setValue(GameState.RUNNING.toString());
-
         }
-
-
     }
 
     public StringProperty getState() {
@@ -87,16 +75,13 @@ public class GameController {
     public void exit() {
         if(!isPaused()){
             pause();
-
-
         }
         saveGameState();
         System.exit(0);
-
     }
 
     private void saveGameState() {
-
+        //TODO: Lage?
     }
 
     public Bear getBear() {
@@ -104,29 +89,24 @@ public class GameController {
     }
 
     private Thread beeMover() {
-        return new Thread(() ->
-        {
-
+        return new Thread(() -> {
             while (state.get().equals(GameState.RUNNING.toString())) {
                 bees.forEach(bee -> {
-                        double currentPos = bee.getxPosition();
-                        double newPosition = currentPos - bee.horizontalStepLength();
-                        if (newPosition > -beeImage.getWidth()) {
-                            bee.setxPosition(newPosition);
-                        } else {
-                            bee.setxPosition(windowWidth+beeImage.getWidth());
-                        }
+                    double currentPos = bee.getxPosition();
+                    double newPosition = currentPos - bee.horizontalStepLength();
+                    if (newPosition > -beeImage.getWidth()) {
+                        bee.setxPosition(newPosition);
+                    } else {
+                        bee.setxPosition(Size.windowwidth+beeImage.getWidth());
+                    }
                 });
                 try {
                     //Let the bees sleep after each movement
                     Thread.sleep(100);
-                } catch (InterruptedException ignored) {
-                }
+                } catch (InterruptedException ignored) {}
             }
-
         });
     }
-
 
    public void moveBearUp() {
         double current = bear.getyPosition();
@@ -134,8 +114,7 @@ public class GameController {
         if (newPosition > 0) {
             bear.setyPosition(newPosition);
         }
-    }
-
+   }
     public void moveBearLeft() {
         double current = bear.getxPosition();
         double newPosition = current - bear.horizontalStepLength();
@@ -143,41 +122,45 @@ public class GameController {
             bear.setxPosition(newPosition);
         }
     }
-
     public void moveBearDown() {
         double current = bear.getyPosition();
         double newPosition = current + bear.verticalStepLength();
-        if (newPosition <= (Size.height - bear.verticalStepLength())) {
+        if (newPosition <= (Size.windowheight - bear.verticalStepLength())) {
             bear.setyPosition(newPosition);
         }
     }
-
     public void moveBearRight() {
         double current = bear.getxPosition();
         double newPosition = current + bear.horizontalStepLength();
-        if (newPosition < (width - bear.getWidth())) {
+        if (newPosition < (Size.windowwidth - bear.getWidth())) {
             bear.setxPosition(newPosition);
         }
     }
 
     public List<Honey> getHoneyPots() {
-
         return honeyPots;
     }
 
     public List<Bee> getBees() {
-
         return bees;
     }
 
     public boolean isGameOver(){
          return bear.getLives() <= 0;
-
     }
 
     public  synchronized void updateGameState() {
+        if (bear.getLives() == 3) {
+            System.out.println("tre liv");
+        } else if (bear.getLives() == 2) {
+            System.out.println("to liv");
+        } else if (bear.getLives() == 1) {
+            System.out.println("et liv");
+        }
+
         if(isGameOver()){
           pause();
+          new GameMenu(this, false);
         }
         else {
             scoreText();
@@ -189,8 +172,7 @@ public class GameController {
             double yForNewHoney = yValues.get(random.nextInt(3));
 
             if (honeyPots.size() < 6 && honeyPots.stream()
-                    .noneMatch(honey -> honey.getxPosition()
-                            == xForNewHoney && honey.getyPosition() == yForNewHoney)) {
+                    .noneMatch(honey -> honey.getxPosition() == xForNewHoney && honey.getyPosition() == yForNewHoney)) {
                 honeyPots.add(new Honey(honeyImage.getWidth(), honeyImage.getHeight(), yForNewHoney, xForNewHoney));
             }
 
@@ -201,11 +183,9 @@ public class GameController {
             double yForNewBee = yValuesBee.get(random.nextInt(3));
 
             if (bees.size() < 3 && bees.stream()
-                    .noneMatch(bee -> bee.getxPosition()
-                            == xForNewBee && bee.getyPosition() == yForNewBee)) {
+                    .noneMatch(bee -> bee.getxPosition() == xForNewBee && bee.getyPosition() == yForNewBee)) {
                 bees.add(new Bee(beeImage.getWidth(), beeImage.getHeight(), yForNewBee, xForNewBee));
             }
-
 
             List<Honey> eatenHoney = honeyPots.stream().filter(honey -> bear.ateHoney(honey)).collect(Collectors.toList());
             honeyPots.removeAll(eatenHoney);
@@ -232,7 +212,7 @@ public class GameController {
     }
 
     public void newGame() {
-        if(state.equals(GameState.RUNNING.toString())){
+        if (state.equals(GameState.RUNNING.toString())){
             state.setValue(GameState.PAUSED.toString());
         }
         bees = new ArrayList<>();
@@ -245,15 +225,7 @@ public class GameController {
         state.setValue(GameState.RUNNING.toString());
         beeMover.start();
         drawScore(pane);
-
-
-
-
-
-
     }
-
-
     public boolean isPaused() {
         return state.get().equals(GameState.PAUSED.toString());
     }

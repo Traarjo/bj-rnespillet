@@ -2,15 +2,26 @@ package game.view;
 
 import game.model.GameState;
 import javafx.animation.AnimationTimer;
+import javafx.animation.FadeTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.Blend;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import game.controller.GameController;
 import game.model.Bear;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextBuilder;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
@@ -28,12 +39,6 @@ public class Level extends Pane {
     private Image renderImage;
     private Thread run = run();
 
-
-
-    private static double windowWidth = Size.width();
-    private static double windowHeight = Size.height();
-
-
     public Level(GameController gameController, Image bearImage, Image beeImage, Image honeyImage, Image bearImage2) {
         this.gameController = gameController;
         this.bearImage = bearImage;
@@ -42,41 +47,43 @@ public class Level extends Pane {
         this.honeyImage = honeyImage;
         this.bearImage2 = bearImage2;
         setId("level");
-        Canvas canvas = new Canvas(windowWidth, windowHeight);
+        Canvas canvas = new Canvas(Size.windowwidth, Size.windowheight);
         gc = canvas.getGraphicsContext2D();
         getChildren().addAll(createTrees(), canvas);
 
         gameController.getState().addListener((observable, oldValue, currentState) -> {
-            if(currentState.equals(GameState.NEW_LEVEL.toString())){
+            if (currentState.equals(GameState.NEW_LEVEL.toString())){
                 render();
-            }
-
-            else if (currentState.equals(GameState.PAUSED.toString())) {
+            } else if (currentState.equals(GameState.PAUSED.toString())) {
                 timer.stop();
-                if(gameController.isGameOver()){
+                if (gameController.isGameOver()) {
                     //TODO show scoeboard..
+                    /*HBox hBox = new HBox();
+                    hBox.setTranslateX(Size.windowwidth / 3);
+                    hBox.setTranslateY(Size.windowwidth / 4);
+                    getChildren().add(hBox);
+
+
+                    Text text = new Text("Game Over");
+                    text.setFont(Font.font("Avenir Next", FontWeight.BOLD, 55));
+                    text.setFill(Color.GREEN);
+                    hBox.getChildren().add(text);*/
                 }
-            } else if(currentState.equals(GameState.RUNNING.toString())) {
+            } else if (currentState.equals(GameState.RUNNING.toString())) {
                 timer.start();
             }
         });
 
-
-
-
         timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                if(!gameController.isPaused()){
+                if (!gameController.isPaused()){
                     gameController.updateGameState();
                     render();
-
                 }
-
             }
         };
         timer.start();
-
     }
 
     private ImageView createTrees() {
@@ -88,11 +95,10 @@ public class Level extends Pane {
     }
 
     private void render() {
-        gc.clearRect(0, 0, windowWidth, windowHeight);
+        gc.clearRect(0, 0, Size.windowwidth, Size.windowheight);
         Bear bear = gameController.getBear();
 
         gc.drawImage(renderImage, bear.getxPosition(), bear.getyPosition(), bear.getWidth(), bear.getHeight());
-        run();
         gameController.getBees().forEach(bee -> gc.drawImage(beeImage, bee.getxPosition(), bee.getyPosition(), bee.getWidth(), bee.getHeight()));
         gameController.getHoneyPots().forEach(honey -> gc.drawImage(honeyImage, honey.getxPosition(), honey.getyPosition(), honey.getWidth(), honey.getHeight()));
         run().start();
@@ -104,9 +110,8 @@ public class Level extends Pane {
                try {
                     run.sleep(100);
                    renderImage = bearImage2;
-                } catch (InterruptedException ignored) {
-                }
-
+               } catch (InterruptedException ignored) {
+               }
             } else {
                 try {
                     run.sleep(100);
@@ -114,12 +119,6 @@ public class Level extends Pane {
                 } catch (InterruptedException ignored) {
                 }
             }
-
         });
-
     }
-
-
-
-
 }

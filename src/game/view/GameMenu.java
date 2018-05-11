@@ -12,12 +12,11 @@ import javafx.stage.Stage;
 public class GameMenu {
     private VBox vbox;
     private Button newGameButton;
+    private Button loadGameButton;
     private Button galleryButton;
     private Button scoreboardButton;
     private Button quitButton;
     private GameController gameController;
-
-
 
     public GameMenu(GameController gameController, boolean canResumeGame){
         Stage stage = new Stage();
@@ -28,19 +27,14 @@ public class GameMenu {
 
         this.gameController = gameController;
         vbox = new VBox();
-        //                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        //<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
 
-        newGameButton = new Button();
-        galleryButton = new Button();
-        scoreboardButton = new Button();
-        quitButton = new Button();
+        loadGameButton = new Button("Last inn spill");
+        newGameButton = new Button("Nytt spill");
+        galleryButton = new Button("Galleri");
+        scoreboardButton = new Button("Poengtavle");
+        quitButton = new Button("Avslutt");
 
-
-
-        newGameButton.setText("Nytt spill");
-        galleryButton.setText("Galleri");
-        scoreboardButton.setText("Poengtavle");
-        quitButton.setText("Avslutt");
         quitButton.setFont(new Font("arial", 14));
 
         newGameButton.setOnAction(e -> {
@@ -48,36 +42,32 @@ public class GameMenu {
             stage.close();
             gameController.newGame();
         });
+        loadGameButton.setOnAction(event -> {
 
-
-
+        });
         galleryButton.setOnAction(e -> {
             e.consume();
             //TODO
         });
-
         scoreboardButton.setOnAction(e -> {
             e.consume();
             //TODO
         });
-
         quitButton.setOnAction(e -> {
             e.consume();
             gameController.exit();
         });
-        if(canResumeGame){
-            Button continiueGameButton = new Button();
-            continiueGameButton.setText("Fortsett");
-            continiueGameButton.setOnAction(e -> {
+        if (canResumeGame){
+            Button continueGameButton = new Button("Fortsett");
+            continueGameButton.setOnAction(e -> {
                 e.consume();
                 stage.close();
                 gameController.resume();
             });
-            vbox.getChildren().add(continiueGameButton);
+            vbox.getChildren().add(continueGameButton);
         }
-        vbox.getChildren().addAll(newGameButton, galleryButton, scoreboardButton,quitButton);
+        vbox.getChildren().addAll(newGameButton, loadGameButton, galleryButton, scoreboardButton,quitButton);
         stage.setScene(new Scene(vbox));
         stage.show();
     }
-
 }
