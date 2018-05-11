@@ -42,17 +42,14 @@ public class GameApplication extends Application {
     private static final int WIDTH    = 200;
     private static final int HEIGHT   = 271;
 
-
     public GameApplication() {
         bearImage = new Image("bilder/B1R.png", Size.windowwidth / 6, Size.windowheight / 5, true, false);
         bearImage2 = new Image("bilder/B1R2.png", Size.windowwidth / 6, Size.windowheight / 5, true, false);
         beeImage = new Image("bilder/bie.png", Size.windowwidth / 10, Size.windowheight / 8, true, false);
         honeyImage = new Image("bilder/honey.png", Size.windowwidth / 13, Size.windowheight / 8, true, false);
         heartImage = new Image("bilder/hjerte.png", Size.windowwidth / 13, Size.windowheight / 8, true, false);
-        this.gameController = new GameController(bearImage, beeImage, honeyImage, heartImage);
-
+        this.gameController = new GameController(bearImage, beeImage, honeyImage);
     }
-
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -61,7 +58,6 @@ public class GameApplication extends Application {
         Label label1 = new Label("Liv");
         label1.setGraphic(new ImageView(heartImage));
         vBox.getChildren().add(label1);*/
-
 
         BorderPane borderPane = new BorderPane();
         borderPane.setTop(new MainMenu(gameController));
@@ -80,13 +76,7 @@ public class GameApplication extends Application {
         stage.setResizable(false);
         stage.show();
 
-
         new GameMenu(gameController, false);
-
-
-
-
-
     }
 
     private EventHandler<KeyEvent> keyhandler() {
@@ -110,13 +100,9 @@ public class GameApplication extends Application {
                     case ESCAPE:
                         gameController.pause();
                         new GameMenu(gameController, true);
-
                         break;
                 }
-
             }
-
         };
     }
-
 }

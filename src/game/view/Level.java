@@ -52,11 +52,9 @@ public class Level extends Pane {
         getChildren().addAll(createTrees(), canvas);
 
         gameController.getState().addListener((observable, oldValue, currentState) -> {
-            if(currentState.equals(GameState.NEW_LEVEL.toString())){
+            if (currentState.equals(GameState.NEW_LEVEL.toString())){
                 render();
-            }
-
-            else if (currentState.equals(GameState.PAUSED.toString())) {
+            } else if (currentState.equals(GameState.PAUSED.toString())) {
                 timer.stop();
                 if (gameController.isGameOver()) {
                     //TODO show scoeboard..
@@ -70,32 +68,22 @@ public class Level extends Pane {
                     text.setFont(Font.font("Avenir Next", FontWeight.BOLD, 55));
                     text.setFill(Color.GREEN);
                     hBox.getChildren().add(text);*/
-
                 }
-
-                } else if (currentState.equals(GameState.RUNNING.toString())) {
-
-                    timer.start();
-                }
-
+            } else if (currentState.equals(GameState.RUNNING.toString())) {
+                timer.start();
+            }
         });
-
-
-
 
         timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                if(!gameController.isPaused()){
+                if (!gameController.isPaused()){
                     gameController.updateGameState();
                     render();
-
                 }
-
             }
         };
         timer.start();
-
     }
 
     private ImageView createTrees() {
@@ -111,7 +99,6 @@ public class Level extends Pane {
         Bear bear = gameController.getBear();
 
         gc.drawImage(renderImage, bear.getxPosition(), bear.getyPosition(), bear.getWidth(), bear.getHeight());
-        run();
         gameController.getBees().forEach(bee -> gc.drawImage(beeImage, bee.getxPosition(), bee.getyPosition(), bee.getWidth(), bee.getHeight()));
         gameController.getHoneyPots().forEach(honey -> gc.drawImage(honeyImage, honey.getxPosition(), honey.getyPosition(), honey.getWidth(), honey.getHeight()));
         run().start();
@@ -123,9 +110,8 @@ public class Level extends Pane {
                try {
                     run.sleep(100);
                    renderImage = bearImage2;
-                } catch (InterruptedException ignored) {
-                }
-
+               } catch (InterruptedException ignored) {
+               }
             } else {
                 try {
                     run.sleep(100);
@@ -133,8 +119,6 @@ public class Level extends Pane {
                 } catch (InterruptedException ignored) {
                 }
             }
-
         });
-
     }
 }

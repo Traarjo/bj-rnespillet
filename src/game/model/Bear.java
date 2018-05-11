@@ -12,7 +12,6 @@ public class Bear {
     private double height;
     Image bear_img = new Image("bilder/B1Preview.png", Size.windowwidth / 6, Size.windowheight / 5, true, false);
 
-
     public Bear(double width, double height) {
         this.xPosition = bear_img.getWidth() * 2;
         this.yPosition = bear_img.getHeight() * 2.5;
@@ -46,7 +45,6 @@ public class Bear {
     /*public void setLives(int lives) {
         this.lives = lives;
     }*/
-
 
     public boolean checkIfGotStungBy(Bee bee) {
         if (xAxisIsInRange(bee.getxPosition(), bee.getWidth()) && yAxisIsInRange(bee.getyPosition(), bee.getHeight())) {

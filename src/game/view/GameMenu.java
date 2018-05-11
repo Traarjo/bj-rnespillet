@@ -17,8 +17,6 @@ public class GameMenu {
     private Button quitButton;
     private GameController gameController;
 
-
-
     public GameMenu(GameController gameController, boolean canResumeGame){
         Stage stage = new Stage();
         stage.setResizable(false);
@@ -28,7 +26,7 @@ public class GameMenu {
 
         this.gameController = gameController;
         vbox = new VBox();
-        //                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        //<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
 
         newGameButton = new Button("Nytt spill");
         galleryButton = new Button("Galleri");
@@ -42,24 +40,19 @@ public class GameMenu {
             stage.close();
             gameController.newGame();
         });
-
-
-
         galleryButton.setOnAction(e -> {
             e.consume();
             //TODO
         });
-
         scoreboardButton.setOnAction(e -> {
             e.consume();
             //TODO
         });
-
         quitButton.setOnAction(e -> {
             e.consume();
             gameController.exit();
         });
-        if(canResumeGame){
+        if (canResumeGame){
             Button continueGameButton = new Button("Fortsett");
             continueGameButton.setOnAction(e -> {
                 e.consume();
