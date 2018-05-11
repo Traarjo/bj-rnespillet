@@ -50,13 +50,16 @@ public class GameController {
 
     public void pause() {
         beeMover.interrupt();
+        honeyMover.interrupt();
         state.setValue(GameState.PAUSED.toString());
     }
 
     public void resume() {
         if(!isGameOver()){
             beeMover = beeMover();
+            honeyMover = honeyMover();
             beeMover.start();
+            honeyMover.start();
             state.setValue(GameState.RUNNING.toString());
         }
     }
