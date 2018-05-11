@@ -17,7 +17,7 @@ public class Bear {
         this.xPosition = bear_img.getWidth() * 2;
         this.yPosition = bear_img.getHeight() * 2.5;
         this.eatenHoney = 0;
-        this.lives = 8;
+        this.lives = 3;
         this.width = width;
         this.height = height;
     }
@@ -53,7 +53,7 @@ public class Bear {
 
     public boolean checkIfGotStungBy(Bee bee) {
         if (xAxisIsInRange(bee.getxPosition(), bee.getWidth()) && yAxisIsInRange(bee.getyPosition(), bee.getHeight())) {
-            lives = lives-1;
+            lives--;
            return true;
 
         }
