@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import game.model.Bear;
 import game.model.Bee;
 import game.model.Honey;
+import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.Arrays;
