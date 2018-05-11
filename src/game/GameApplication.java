@@ -33,10 +33,6 @@ public class GameApplication extends Application {
     private Image bearImage2;
     private Image heartImage;
 
-
-    private static double windowWidth = Size.width();
-    private static double windowHeight = Size.height();
-
     private static final Image IMAGE = new Image("bilder/bjornar.png");
 
     private static final int COLUMNS  =  5;
@@ -48,12 +44,12 @@ public class GameApplication extends Application {
 
 
     public GameApplication() {
-        bearImage = new Image("bilder/B1R.png", Size.width / 6, Size.height / 5, true, false);
-        bearImage2 = new Image("bilder/B1R2.png", Size.width / 6, Size.height / 5, true, false);
-        beeImage = new Image("bilder/bie.png", Size.width / 10, Size.height / 8, true, false);
-        honeyImage = new Image("bilder/honey.png", Size.width / 13, Size.height / 8, true, false);
+        bearImage = new Image("bilder/B1R.png", Size.windowwidth / 6, Size.windowheight / 5, true, false);
+        bearImage2 = new Image("bilder/B1R2.png", Size.windowwidth / 6, Size.windowheight / 5, true, false);
+        beeImage = new Image("bilder/bie.png", Size.windowwidth / 10, Size.windowheight / 8, true, false);
+        honeyImage = new Image("bilder/honey.png", Size.windowwidth / 13, Size.windowheight / 8, true, false);
         this.gameController = new GameController(bearImage, beeImage, honeyImage);
-        heartImage = new Image("bilder/hjerte.png", Size.width / 13, Size.height / 8, true, false);
+        heartImage = new Image("bilder/hjerte.png", Size.windowwidth / 13, Size.windowheight / 8, true, false);
 
     }
 
@@ -70,7 +66,7 @@ public class GameApplication extends Application {
         BorderPane borderPane = new BorderPane();
         borderPane.setTop(new MainMenu(gameController));
         borderPane.setCenter(new Level(gameController, bearImage, beeImage, honeyImage, bearImage2));
-        Scene scene = new Scene(borderPane, Size.width, Size.height);
+        Scene scene = new Scene(borderPane, Size.windowwidth, Size.windowheight);
         scene.setOnKeyPressed(keyhandler());
         scene.getStylesheets().add("Stylesheet.css");
         stage.setScene(scene);

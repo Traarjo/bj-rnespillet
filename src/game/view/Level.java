@@ -28,12 +28,6 @@ public class Level extends Pane {
     private Image renderImage;
     private Thread run = run();
 
-
-
-    private static double windowWidth = Size.width();
-    private static double windowHeight = Size.height();
-
-
     public Level(GameController gameController, Image bearImage, Image beeImage, Image honeyImage, Image bearImage2) {
         this.gameController = gameController;
         this.bearImage = bearImage;
@@ -42,7 +36,7 @@ public class Level extends Pane {
         this.honeyImage = honeyImage;
         this.bearImage2 = bearImage2;
         setId("level");
-        Canvas canvas = new Canvas(windowWidth, windowHeight);
+        Canvas canvas = new Canvas(Size.windowwidth, Size.windowheight);
         gc = canvas.getGraphicsContext2D();
         getChildren().addAll(createTrees(), canvas);
 
@@ -88,7 +82,7 @@ public class Level extends Pane {
     }
 
     private void render() {
-        gc.clearRect(0, 0, windowWidth, windowHeight);
+        gc.clearRect(0, 0, Size.windowwidth, Size.windowheight);
         Bear bear = gameController.getBear();
 
         gc.drawImage(renderImage, bear.getxPosition(), bear.getyPosition(), bear.getWidth(), bear.getHeight());
@@ -118,8 +112,4 @@ public class Level extends Pane {
         });
 
     }
-
-
-
-
 }

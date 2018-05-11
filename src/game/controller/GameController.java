@@ -29,8 +29,6 @@ public class GameController {
     private Image bearImage;
     private Image beeImage;
     private Image honeyImage;
-    private static double windowWidth = Size.width();
-    private static double windowHeight = Size.height();
 
 
     public GameController(Image bearImage, Image beeImage, Image honeyImage) {
@@ -107,7 +105,7 @@ public class GameController {
                         if (newPosition > -beeImage.getWidth()) {
                             bee.setxPosition(newPosition);
                         } else {
-                            bee.setxPosition(windowWidth+beeImage.getWidth());
+                            bee.setxPosition(Size.windowwidth+beeImage.getWidth());
                         }
                 });
                 try {
@@ -140,7 +138,7 @@ public class GameController {
     public void moveBearDown() {
         double current = bear.getyPosition();
         double newPosition = current + bear.verticalStepLength();
-        if (newPosition <= (Size.height - bear.verticalStepLength())) {
+        if (newPosition <= (Size.windowheight - bear.verticalStepLength())) {
             bear.setyPosition(newPosition);
         }
     }
@@ -148,7 +146,7 @@ public class GameController {
     public void moveBearRight() {
         double current = bear.getxPosition();
         double newPosition = current + bear.horizontalStepLength();
-        if (newPosition < (width - bear.getWidth())) {
+        if (newPosition < (Size.windowwidth - bear.getWidth())) {
             bear.setxPosition(newPosition);
         }
     }

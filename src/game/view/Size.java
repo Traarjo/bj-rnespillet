@@ -6,18 +6,18 @@ import javafx.stage.Screen;
 
 
 public class Size {
-    public static double width = width();
-    public static double height = height();
+    public static double windowwidth = width();
+    public static double windowheight = height();
 
 
     public static double width() {
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        double width = primaryScreenBounds.getWidth()/2;
-        return width;
+        double windowwidth = primaryScreenBounds.getWidth()/2;
+        return windowwidth;
     }
     public  static double height() {
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        double height = primaryScreenBounds.getHeight()/1.5;
-        return height;
+        double windowheight = primaryScreenBounds.getHeight()/1.5;
+        return windowheight;
     }
 }

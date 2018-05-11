@@ -10,9 +10,7 @@ public class Bear {
     private double yPosition;
     private double width;
     private double height;
-    Image bear_img = new Image("bilder/B1Preview.png", windowWidth / 6, windowHeight / 5, true, false);
-    private static double windowWidth = Size.width();
-    private static double windowHeight = Size.height();
+    Image bear_img = new Image("bilder/B1Preview.png", Size.windowwidth / 6, Size.windowheight / 5, true, false);
 
 
     public Bear(double width, double height) {
