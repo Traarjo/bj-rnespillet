@@ -159,7 +159,7 @@ public class GameController {
 
         if(isGameOver()){
           pause();
-            new GameMenu(this, true);
+          new GameMenu(this, false);
         }
         else {
             Random random = new Random();
