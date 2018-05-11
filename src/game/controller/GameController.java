@@ -47,13 +47,6 @@ public class GameController {
         return bear;
     }
 
-
-    private void createHoneyPots(double width, double height) {
-        honeyPots.add(new Honey(width, height, 250, Math.random()*500.0));
-       // honeyPots.add(new Honey(width, height, 400, Math.random()*500.0));
-        // honeyPots.add(new Honey(width, height, 550, Math.random()*500.0));
-    }
-
     public void pause() {
         beeMover.interrupt();
         state.setValue(GameState.PAUSED.toString());
@@ -217,7 +210,6 @@ public class GameController {
         bees = new ArrayList<>();
         honeyPots = new ArrayList<>();
         bear = new Bear(bearImage.getWidth(), bearImage.getHeight());
-        createHoneyPots(honeyImage.getWidth(), honeyImage.getHeight());
         beeMover = beeMover();
         state.setValue(GameState.NEW_LEVEL.toString());
         state.setValue(GameState.RUNNING.toString());
