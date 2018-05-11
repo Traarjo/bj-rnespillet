@@ -2,15 +2,21 @@ package game.view;
 
 import game.model.GameState;
 import javafx.animation.AnimationTimer;
+import javafx.animation.FadeTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import game.controller.GameController;
 import game.model.Bear;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextBuilder;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
@@ -47,11 +53,32 @@ public class Level extends Pane {
 
             else if (currentState.equals(GameState.PAUSED.toString())) {
                 timer.stop();
-                if(gameController.isGameOver()){
+                if (gameController.isGameOver()) {
                     //TODO show scoeboard..
+                    String gameOver = "Game over!";
+                    HBox hBox = new HBox();
+                    hBox.setTranslateX(Size.windowwidth/3);
+                    hBox.setTranslateY(Size.windowwidth/4);
+                    getChildren().add(hBox);
+
+                    for (int i = 0; i < gameOver.toCharArray().length; i++) {
+                        char letter = gameOver.charAt(i);
+
+                        Text text = new Text(String.valueOf(letter));
+                        text.setFont(Font.font(48));
+                        text.setFont(Font.font("Avenir Next", FontWeight.BOLD, 45));
+
+                        hBox.getChildren().add(text);
+
+                        FadeTransition ft = new FadeTransition();
+                        ft.setToValue(1);
+                        ft.play();
+
+                    }
+
+                } else if (currentState.equals(GameState.RUNNING.toString())) {
+                    timer.start();
                 }
-            } else if(currentState.equals(GameState.RUNNING.toString())) {
-                timer.start();
             }
         });
 
