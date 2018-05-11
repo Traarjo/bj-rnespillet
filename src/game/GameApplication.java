@@ -1,10 +1,12 @@
 package game;
 
+import game.model.Bear;
 import game.model.GameState;
 import game.view.*;
 import javafx.animation.Animation;
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -14,7 +16,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import game.controller.GameController;
 import javafx.util.Duration;
@@ -32,6 +37,8 @@ public class GameApplication extends Application {
     private Image honeyImage;
     private Image bearImage2;
     private Image heartImage;
+    private Bear bear;
+
 
 
     private static double windowWidth = Size.width();
@@ -55,8 +62,12 @@ public class GameApplication extends Application {
         this.gameController = new GameController(bearImage, beeImage, honeyImage);
         heartImage = new Image("bilder/hjerte.png", Size.width / 13, Size.height / 8, true, false);
 
-    }
 
+        /*if(bear.getEatenHoney() >= 10){
+            bearImage = new Image("bilder/B2R.png", Size.width / 6, Size.height / 5, true, false);
+            bearImage2 = new Image("bilder/B2R2.png", Size.width / 6, Size.height / 5, true, false);
+        }*/
+    }
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -65,10 +76,12 @@ public class GameApplication extends Application {
         Label label1 = new Label("Liv");
         label1.setGraphic(new ImageView(heartImage));
         vBox.getChildren().add(label1);*/
-
-
         BorderPane borderPane = new BorderPane();
-        borderPane.setTop(new MainMenu(gameController));
+        VBox pane2 = new VBox();
+        pane2.getChildren().add(new MainMenu(gameController));
+        pane2.getChildren().add(new Text("Score: "));
+        borderPane.setTop(pane2);
+        //borderPane.setTop(new MainMenu(gameController));
         borderPane.setCenter(new Level(gameController, bearImage, beeImage, honeyImage, bearImage2));
         Scene scene = new Scene(borderPane, Size.width, Size.height);
         scene.setOnKeyPressed(keyhandler());

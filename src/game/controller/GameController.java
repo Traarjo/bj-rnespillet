@@ -1,7 +1,7 @@
 package game.controller;
 
+import game.GameApplication;
 import game.model.GameState;
-import game.view.Level;
 import game.view.Size;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -10,6 +10,9 @@ import javafx.scene.image.Image;
 import game.model.Bear;
 import game.model.Bee;
 import game.model.Honey;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,6 +34,10 @@ public class GameController {
     private Image honeyImage;
     private static double windowWidth = Size.width();
     private static double windowHeight = Size.height();
+    private int points = 0;
+
+    public Text score = new Text();
+    Pane pane = new Pane();
 
 
     public GameController(Image bearImage, Image beeImage, Image honeyImage) {
@@ -173,6 +180,7 @@ public class GameController {
           pause();
         }
         else {
+            scoreText();
             Random random = new Random();
             List<Integer> xValues = Arrays.asList(20, 200, 350, 500, 650, 770);
             double xForNewHoney = xValues.get(random.nextInt(6));
@@ -212,6 +220,17 @@ public class GameController {
         }
     }
 
+    public void drawScore(Pane pane){
+        pane.getChildren().add(score);
+        score.setTranslateX(500);
+        score.setTranslateY(500);
+
+    }
+
+    public void scoreText(){
+        score.setText("Score: " + bear.getEatenHoney());
+    }
+
     public void newGame() {
         if(state.equals(GameState.RUNNING.toString())){
             state.setValue(GameState.PAUSED.toString());
@@ -225,6 +244,8 @@ public class GameController {
         state.setValue(GameState.NEW_LEVEL.toString());
         state.setValue(GameState.RUNNING.toString());
         beeMover.start();
+        drawScore(pane);
+
 
 
 

@@ -4,7 +4,7 @@ import game.view.Size;
 import javafx.scene.image.Image;
 
 public class Bear {
-    private int eatenHoney;
+    public int eatenHoney = 0;
     private int lives;
     private double xPosition;
     private double yPosition;
@@ -18,7 +18,6 @@ public class Bear {
     public Bear(double width, double height) {
         this.xPosition = bear_img.getWidth() * 2;
         this.yPosition = bear_img.getHeight() * 2.5;
-        this.eatenHoney = 0;
         this.lives = 8;
         this.width = width;
         this.height = height;
@@ -44,6 +43,8 @@ public class Bear {
         return eatenHoney;
     }
 
+    public void setEatenHoney(int eatenHoney){ this.eatenHoney = eatenHoney;}
+
     public int getLives() {
         return lives;
     }
@@ -63,10 +64,10 @@ public class Bear {
     }
 
 
-
     public boolean ateHoney(Honey honey) {
         if (xAxisIsInRange(honey.getxPosition(), honey.getWidth()) && yAxisIsInRange(honey.getyPosition(), honey.getHeight())) {
-            eatenHoney = eatenHoney++;
+            setEatenHoney(getEatenHoney()+1);
+            System.out.println("Score: " + eatenHoney);
             return true;
 
         }
