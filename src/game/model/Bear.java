@@ -86,6 +86,9 @@ public class Bear {
     public double getHeight() {
         return height;
     }
+    public double startPosition() {
+        return height * 2.5;
+    }
     public double horizontalStepLength() {
         return width / 5;
     }

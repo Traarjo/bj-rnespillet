@@ -33,11 +33,10 @@ public class GameController {
         this.honeyImage = honeyImage;
     }
 
-    private void createBees(double width, double height) {
-        bees.add(new Bee(width, height, 200, Math.random()*50.0));
-        //bees.add(new Bee(width, height, 350, Math.random()*100.0));
-        //bees.add(new Bee(width, height, 500, Math.random()*150.0));
+    public Bear getBear() {
+        return bear;
     }
+
 
     private void createHoneyPots(double width, double height) {
         honeyPots.add(new Honey(width, height, 250, Math.random()*500.0));
@@ -72,10 +71,6 @@ public class GameController {
 
     private void saveGameState() {
         //TODO: Lage?
-    }
-
-    public Bear getBear() {
-        return bear;
     }
 
     private Thread beeMover() {
@@ -157,7 +152,11 @@ public class GameController {
             List<Integer> xValues = Arrays.asList(20, 200, 350, 500, 650, 770);
             double xForNewHoney = xValues.get(random.nextInt(6));
 
-            List<Integer> yValues = Arrays.asList(250, 400, 550);
+            double lane1 = bear.startPosition() - bear.verticalStepLength();
+            double lane2 = bear.startPosition();
+            double lane3 = bear.startPosition() + bear.verticalStepLength();
+
+            List<Integer> yValues = Arrays.asList((int)lane1, (int)lane2, (int)lane3);
             double yForNewHoney = yValues.get(random.nextInt(3));
 
             if (honeyPots.size() < 6 && honeyPots.stream()
@@ -168,7 +167,7 @@ public class GameController {
             List<Integer> xValuesBee = Arrays.asList(20, 200, 350, 500, 650, 770);
             double xForNewBee = xValuesBee.get(random.nextInt(6));
 
-            List<Integer> yValuesBee = Arrays.asList(250, 400, 550);
+            List<Integer> yValuesBee = Arrays.asList((int)lane1, (int)lane2, (int)lane3);
             double yForNewBee = yValuesBee.get(random.nextInt(3));
 
             if (bees.size() < 3 && bees.stream()
@@ -197,7 +196,6 @@ public class GameController {
         honeyPots = new ArrayList<>();
         bear = new Bear(bearImage.getWidth(), bearImage.getHeight());
         createHoneyPots(honeyImage.getWidth(), honeyImage.getHeight());
-        createBees(beeImage.getWidth(), beeImage.getHeight());
         beeMover = beeMover();
         state.setValue(GameState.NEW_LEVEL.toString());
         state.setValue(GameState.RUNNING.toString());
