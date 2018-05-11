@@ -4,14 +4,13 @@ import game.view.Size;
 import javafx.scene.image.Image;
 
 public class Bear {
-    private int eatenHoney;
+    public int eatenHoney = 0;
     private int lives;
     private double xPosition;
     private double yPosition;
     private double width;
     private double height;
     Image bear_img = new Image("bilder/B1Preview.png", Size.windowwidth / 6, Size.windowheight / 5, true, false);
-
 
     public Bear(double width, double height) {
         this.xPosition = bear_img.getWidth() * 2;
@@ -39,6 +38,9 @@ public class Bear {
     public int getEatenHoney() {
         return eatenHoney;
     }
+
+    public void setEatenHoney(int eatenHoney){ this.eatenHoney = eatenHoney;}
+
     public int getLives() {
         return lives;
     }
@@ -46,7 +48,6 @@ public class Bear {
     /*public void setLives(int lives) {
         this.lives = lives;
     }*/
-
 
     public boolean checkIfGotStungBy(Bee bee) {
         if (xAxisIsInRange(bee.getxPosition(), bee.getWidth()) && yAxisIsInRange(bee.getyPosition(), bee.getHeight())) {
@@ -56,9 +57,11 @@ public class Bear {
         return false;
     }
 
+
     public boolean ateHoney(Honey honey) {
         if (xAxisIsInRange(honey.getxPosition(), honey.getWidth()) && yAxisIsInRange(honey.getyPosition(), honey.getHeight())) {
-            eatenHoney++;
+            setEatenHoney(getEatenHoney()+1);
+            System.out.println("Score: " + eatenHoney);
             return true;
         }
         return false;
@@ -87,6 +90,9 @@ public class Bear {
     }
     public double getHeight() {
         return height;
+    }
+    public double startPosition() {
+        return height * 2.5;
     }
     public double horizontalStepLength() {
         return width / 5;

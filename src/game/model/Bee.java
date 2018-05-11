@@ -13,22 +13,19 @@ public class Bee {
         this.width = width;
     }
 
-    public double getxPosition() {
-        return xPosition;
-    }
-
     public void setxPosition(double xPosition) {
         this.xPosition = xPosition;
     }
-
-    public double getyPosition() {
-        return yPosition;
+    public double getxPosition() {
+        return xPosition;
     }
 
     public void setyPosition(double yPosition) {
         this.yPosition = yPosition;
     }
-
+    public double getyPosition() {
+        return yPosition;
+    }
 
     public double getWidth() {
         return width;
@@ -41,5 +38,4 @@ public class Bee {
     public double horizontalStepLength() {
         return width / 10;
     }
-
 }
