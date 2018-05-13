@@ -30,6 +30,8 @@ import static java.lang.Thread.sleep;
 
 public class Level extends Pane {
     private GameController gameController;
+    private Image bearRun1;
+    private Image bearRun2;
     private Image bearImage;
     private Image bearImage2;
     private Image bearImage3;
@@ -69,9 +71,10 @@ public class Level extends Pane {
                  Image bearImage17, Image bearImage18,
                  Image bearImage19, Image bearImage20) {
         this.gameController = gameController;
-        this.bearImage = bearImage;
         this.renderImage = bearImage;
         this.beeImage = beeImage;
+
+        this.bearImage = bearImage;
         this.honeyImage = honeyImage;
         this.bearImage2 = bearImage2;
         this.bearImage3 = bearImage3;
@@ -92,6 +95,9 @@ public class Level extends Pane {
         this.bearImage18 = bearImage18;
         this.bearImage19 = bearImage19;
         this.bearImage20 = bearImage20;
+        this.bearRun1 = bearImage;
+        this.bearRun2 = bearImage2;
+
         setId("level");
         Canvas canvas = new Canvas(Size.windowwidth, Size.windowheight);
         gc = canvas.getGraphicsContext2D();
@@ -149,41 +155,45 @@ public class Level extends Pane {
         gameController.getHoneyPots().forEach(honey -> gc.drawImage(honeyImage, honey.getxPosition(), honey.getyPosition(), honey.getWidth(), honey.getHeight()));
 
         switch (bear.getEatenHoney()) {
+            case 0:
+                bearRun1 = bearImage;
+                bearRun2= bearImage2;
+                break;
             case 10:
-                bearImage = bearImage3;
-                bearImage2 = bearImage4;
+                bearRun1 = bearImage3;
+                bearRun2 = bearImage4;
                 break;
             case 20:
-                bearImage = bearImage5;
-                bearImage2 = bearImage6;
+                bearRun1 = bearImage5;
+                bearRun2 = bearImage6;
                 break;
             case 30:
-                bearImage = bearImage7;
-                bearImage2 = bearImage8;
+                bearRun1 = bearImage7;
+                bearRun2 = bearImage8;
                 break;
             case 40:
-                bearImage = bearImage9;
-                bearImage2 = bearImage10;
+                bearRun1 = bearImage9;
+                bearRun2 = bearImage10;
                 break;
             case 50:
-                bearImage = bearImage11;
-                bearImage2 = bearImage12;
+                bearRun1 = bearImage11;
+                bearRun2 = bearImage12;
                 break;
             case 70:
-                bearImage = bearImage13;
-                bearImage2 = bearImage14;
+                bearRun1 = bearImage13;
+                bearRun2 = bearImage14;
                 break;
             case 80:
-                bearImage = bearImage15;
-                bearImage2 = bearImage16;
+                bearRun1 = bearImage15;
+                bearRun2 = bearImage16;
                 break;
             case 90:
-                bearImage = bearImage17;
-                bearImage2 = bearImage18;
+                bearRun1 = bearImage17;
+                bearRun2 = bearImage18;
                 break;
             case 100:
-                bearImage = bearImage19;
-                bearImage2 = bearImage20;
+                bearRun1 = bearImage19;
+                bearRun2 = bearImage20;
                 break;
 
 
@@ -195,16 +205,16 @@ public class Level extends Pane {
     public Thread run() {
         return new Thread(() ->
         {
-            if (renderImage == bearImage) {
+            if (renderImage == bearRun1) {
                try {
                     run.sleep(100);
-                   renderImage = bearImage2;
+                   renderImage = bearRun2;
                } catch (InterruptedException ignored) {
                }
             } else {
                 try {
                     run.sleep(100);
-                    renderImage = bearImage;
+                    renderImage = bearRun1;
                 } catch (InterruptedException ignored) {
                 }
             }
