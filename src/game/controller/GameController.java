@@ -1,47 +1,50 @@
 package game.controller;
 
-import game.GameApplication;
-import game.model.GameState;
+import game.model.*;
 import game.view.GameMenu;
 import game.view.Size;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
-import game.model.Bear;
-import game.model.Bee;
-import game.model.Honey;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class GameController {
     private Bear bear;
     private StringProperty state = new SimpleStringProperty(GameState.PAUSED.toString());
     private List<Bee> bees = new ArrayList<>();
     private List<Honey> honeyPots = new ArrayList<>();
-    private Thread beeMover;
-    private Thread honeyMover;
+    private ScheduledExecutorService beeMover;
+    private ScheduledExecutorService honeyMover;
     private Image bearImage;
     private Image beeImage;
     private Image honeyImage;
-    private static double windowWidth = Size.width();
-    private static double windowHeight = Size.height();
-    private int points = 0;
+    private Path gameDataFile;
+    private List<HighScore> highScores = new ArrayList<>();
 
-    public Text score = new Text();
-    BorderPane borderPane = new BorderPane();
+
 
     public GameController(Image bearImage, Image beeImage, Image honeyImage) {
         this.bearImage = bearImage;
         this.beeImage = beeImage;
         this.honeyImage = honeyImage;
+        this.gameDataFile = Paths.get("gamestate");
+        beeMover = Executors.newSingleThreadScheduledExecutor();
+        beeMover.scheduleAtFixedRate(beeMover(), 7, 7, TimeUnit.MILLISECONDS);
+        honeyMover = Executors.newSingleThreadScheduledExecutor();
+        honeyMover.scheduleAtFixedRate(honeyMover(), 10, 10, TimeUnit.MILLISECONDS);
+
     }
 
     public Bear getBear() {
@@ -49,19 +52,23 @@ public class GameController {
     }
 
     public void pause() {
-        beeMover.interrupt();
-        honeyMover.interrupt();
         state.setValue(GameState.PAUSED.toString());
     }
 
     public void resume() {
         if(!isGameOver()){
-            beeMover = beeMover();
-            honeyMover = honeyMover();
-            beeMover.start();
-            honeyMover.start();
             state.setValue(GameState.RUNNING.toString());
         }
+    }
+
+    public void addHighScore(HighScore score){
+        highScores.add(score);
+        Collections.sort(highScores, (o1, o2) -> Integer.compare(o2.getScore(), o1.getScore()));
+
+    }
+
+    public List<HighScore> getHighScores(){
+        return highScores;
     }
 
     public StringProperty getState() {
@@ -76,13 +83,107 @@ public class GameController {
         System.exit(0);
     }
 
-    private void saveGameState() {
-        //TODO: Lage?
+
+    public void loadGame(){
+        if(canLoadGame()){
+            String currentLine;
+            try(BufferedReader reader = Files.newBufferedReader(gameDataFile)){
+                while((currentLine = reader.readLine()) != null){
+                    String[] tokens = currentLine.split(";");
+
+                    if(tokens[0].equals("Bear")){
+                        bear = new Bear(bearImage.getWidth(), bearImage.getHeight());
+                        bear.setEatenHoney(Integer.parseInt(tokens[1]));
+                        bear.setLives(Integer.parseInt(tokens[2]));
+                        bear.setxPosition(Double.parseDouble(tokens[3]));
+                        bear.setyPosition(Double.parseDouble(tokens[4]));
+
+
+
+                    }
+
+                    else if(tokens[0].equals("Honey")){
+                        honeyPots.add(new Honey(honeyImage.getWidth(), honeyImage.getHeight(), Double.parseDouble(tokens[2]), Double.parseDouble(tokens[1])));
+
+                    }
+
+                    else if(tokens[0].equals("Bee")){
+                        bees.add(new Bee(beeImage.getWidth(), beeImage.getHeight(), Double.parseDouble(tokens[2]), Double.parseDouble(tokens[1])));
+
+                    }
+                }
+                state.setValue(GameState.RUNNING.toString());
+
+
+            } catch (IOException e) {
+                //Failed to load file, loading a new game...
+               newGame();
+            }
+
+            deleteGameFile();
+
+
+        }
     }
 
-    private Thread beeMover() {
-        return new Thread(() -> {
-            while (state.get().equals(GameState.RUNNING.toString())) {
+    public boolean canLoadGame() {
+        return Files.exists(gameDataFile);
+    }
+
+    private void saveGameState() {
+       if(!isGameOver()){
+           try {
+               deleteGameFile();
+               try(BufferedWriter writer = Files.newBufferedWriter(gameDataFile)){
+                   writer.write("Bear;");
+                   writer.write(Integer.toString(bear.getEatenHoney()));
+                   writer.write(";");
+                   writer.write(Integer.toString(bear.getLives()));
+                   writer.write(";");
+                   writer.write(Double.toString(bear.getxPosition()));
+                   writer.write(";");
+                   writer.write(Double.toString(bear.getyPosition()));
+                   writer.newLine();
+
+                   for(Honey honey : honeyPots){
+                       writer.write("Honey;");
+                       writer.write(Double.toString(honey.getxPosition()));
+                       writer.write(";");
+                       writer.write(Double.toString(honey.getyPosition()));
+                       writer.newLine();
+                   }
+
+                   for(Bee bee : bees){
+                       writer.write("Bee;");
+                       writer.write(Double.toString(bee.getxPosition()));
+                       writer.write(";");
+                       writer.write(Double.toString(bee.getyPosition()));
+                       writer.newLine();
+                   }
+                   writer.flush();
+
+
+
+               }
+           } catch (IOException ignored) {
+           }
+
+
+       }
+    }
+
+    private void deleteGameFile()  {
+        if(Files.exists(gameDataFile)){
+            try {
+                Files.delete(gameDataFile);
+            } catch (IOException ignored) {
+            }
+        }
+    }
+
+    private Runnable beeMover() {
+        return () -> {
+            if(isGameRunning()){
                 bees.forEach(bee -> {
                     double currentPos = bee.getxPosition();
                     double newPosition = currentPos - bee.horizontalStepLength();
@@ -92,17 +193,14 @@ public class GameController {
                         bee.setxPosition(Size.windowwidth+beeImage.getWidth());
                     }
                 });
-                try {
-                    //Let the bees sleep after each movement
-                    Thread.sleep(7);
-                } catch (InterruptedException ignored) {}
+
             }
-        });
+        };
     }
 
-    private Thread honeyMover() {
-        return new Thread(() -> {
-            while (state.get().equals(GameState.RUNNING.toString())) {
+    private Runnable honeyMover(){
+        return () -> {
+            if(isGameRunning()){
                 honeyPots.forEach(honey -> {
                     double currentPos = honey.getxPosition();
                     double newPosition = currentPos - honey.horizontalStepLength();
@@ -112,13 +210,15 @@ public class GameController {
                         honey.setxPosition(Size.windowwidth+honeyImage.getWidth());
                     }
                 });
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException ignored) {}
-            }
-        });
 
+            }
+        };
     }
+
+    public boolean isGameRunning() {
+        return state.get().equals(GameState.RUNNING.toString());
+    }
+
 
    public void moveBearUp() {
         double current = bear.getyPosition();
@@ -158,27 +258,16 @@ public class GameController {
     }
 
     public boolean isGameOver(){
-         return bear.getLives() <= 0;
+         return bear == null ||  bear.getLives() <= 0;
     }
 
     //dele opp denne?
     public  synchronized void updateGameState() {
-        if (bear.getLives() == 3) {
-            System.out.println("tre liv");
-        } else if (bear.getLives() == 2) {
-            System.out.println("to liv");
-        } else if (bear.getLives() == 1) {
-            System.out.println("et liv");
-        } else {
-            System.out.println("null liv");
-        }
-
         if(isGameOver()){
           pause();
           new GameMenu(this, false);
         }
         else {
-            scoreText();
             Random random = new Random();
 
             double lane1 = bear.startPosition() - bear.verticalStepLength();
@@ -190,7 +279,7 @@ public class GameController {
             List<Integer> yValuesBee = Arrays.asList((int)lane1, (int)lane2, (int)lane3);
 
             //Bier
-            double xForNewBee = xValuesBee.get(random.nextInt(6))+(int)windowWidth;
+            double xForNewBee = xValuesBee.get(random.nextInt(6))+Size.width();
             double yForNewBee = yValuesBee.get(random.nextInt(3));
 
             if (bees.size() < 3 && bees.stream()
@@ -199,7 +288,7 @@ public class GameController {
             }
 
             //Honning
-            double xForNewHoney = xValuesBee.get(random.nextInt(6))+(int)windowWidth;
+            double xForNewHoney = xValuesBee.get(random.nextInt(6))+Size.width();
             double yForNewHoney = yValuesBee.get(random.nextInt(3));
 
             if (honeyPots.size() < 4 && honeyPots.stream()
@@ -231,32 +320,19 @@ public class GameController {
         }
     }
 
-    public void drawScore(BorderPane borderPane){
-        borderPane.getChildren().add(score);
-        score.setTranslateX(500);
-        score.setTranslateY(500);
-
-    }
-
-    public void scoreText(){
-        score.setText("Score: " + bear.getEatenHoney());
-    }
-
     public void newGame() {
-        if (state.equals(GameState.RUNNING.toString())){
-            state.setValue(GameState.PAUSED.toString());
+        deleteGameFile();
+        if (isGameRunning()){
+            pause();
         }
-        bees = new ArrayList<>();
-        honeyPots = new ArrayList<>();
+        bees.clear();
+        honeyPots.clear();
         bear = new Bear(bearImage.getWidth(), bearImage.getHeight());
-        beeMover = beeMover();
-        honeyMover = honeyMover();
-        state.setValue(GameState.NEW_LEVEL.toString());
         state.setValue(GameState.RUNNING.toString());
-        beeMover.start();
-        honeyMover.start();
-        drawScore(borderPane);
     }
+
+
+
     public boolean isPaused() {
         return state.get().equals(GameState.PAUSED.toString());
     }

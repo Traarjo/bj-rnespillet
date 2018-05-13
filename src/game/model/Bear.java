@@ -48,13 +48,16 @@ public class Bear {
         return lives;
     }
 
-    /*public void setLives(int lives) {
+    public void setLives(int lives) {
         this.lives = lives;
-    }*/
+    }
 
     public boolean checkIfGotStungBy(Bee bee) {
         if (xAxisIsInRange(bee.getxPosition(), bee.getWidth()) && yAxisIsInRange(bee.getyPosition(), bee.getHeight())) {
             lives--;
+            if(lives < 0){
+                lives = 0;
+            }
            return true;
         }
         return false;
@@ -64,11 +67,12 @@ public class Bear {
     public boolean ateHoney(Honey honey) {
         if (xAxisIsInRange(honey.getxPosition(), honey.getWidth()) && yAxisIsInRange(honey.getyPosition(), honey.getHeight())) {
             setEatenHoney(getEatenHoney()+1);
-            System.out.println("Score: " + eatenHoney);
             return true;
         }
         return false;
     }
+
+
 
     private boolean xAxisIsInRange(double objectXPosition, double objectWidth) {
         double highestX = this.xPosition + getWidth();

@@ -43,6 +43,8 @@ public class GameMenu {
             gameController.newGame();
         });
         loadGameButton.setOnAction(event -> {
+            stage.close();
+            gameController.loadGame();
 
         });
         galleryButton.setOnAction(e -> {
@@ -51,7 +53,7 @@ public class GameMenu {
         });
         scoreboardButton.setOnAction(e -> {
             e.consume();
-            //TODO
+            new HighScoreView(gameController.getHighScores());
         });
         quitButton.setOnAction(e -> {
             e.consume();
@@ -66,7 +68,12 @@ public class GameMenu {
             });
             vbox.getChildren().add(continueGameButton);
         }
-        vbox.getChildren().addAll(newGameButton, loadGameButton, galleryButton, scoreboardButton,quitButton);
+
+        vbox.getChildren().add(newGameButton);
+        if(gameController.canLoadGame()){
+            vbox.getChildren().addAll(loadGameButton);
+        }
+        vbox.getChildren().addAll(galleryButton, scoreboardButton,quitButton);
         stage.setScene(new Scene(vbox));
         stage.show();
     }

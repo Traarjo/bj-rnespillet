@@ -9,7 +9,6 @@ import game.controller.GameController;
 public class MainMenu extends MenuBar {
     private Menu fileMenu;
     private MenuItem newGameItem;
-    private MenuItem loadGameItem;
     private MenuItem pauseResumeItem;
     private MenuItem exit;
     private Menu helpMenu;
@@ -18,15 +17,11 @@ public class MainMenu extends MenuBar {
     public MainMenu(GameController gameController) {
         fileMenu = new Menu("Fil");
         newGameItem = new MenuItem("Nytt spill");
-        loadGameItem = new MenuItem("Last inn spill");
         pauseResumeItem = new MenuItem("Pause");
 
         newGameItem.setOnAction(e -> {
             e.consume();
             gameController.newGame();
-        });
-        loadGameItem.setOnAction(event -> {
-
         });
         pauseResumeItem.setOnAction(e -> {
             e.consume();
@@ -54,7 +49,9 @@ public class MainMenu extends MenuBar {
             gameController.exit();
         });
 
-        fileMenu.getItems().addAll(newGameItem, loadGameItem, pauseResumeItem, exit);
+
+        fileMenu.getItems().addAll(newGameItem, pauseResumeItem, exit);
+
 
         helpMenu = new Menu("Hjelp");
 
