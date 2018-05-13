@@ -17,7 +17,7 @@ public class StatusLine extends HBox {
     private Text lives;
     private int numberOflives;
     private int points;
-    Font myFont = new Font("Serif", 20);
+//    Font myFont = new Font("Serif", 20);
 
 
 
@@ -26,10 +26,10 @@ public class StatusLine extends HBox {
         this.numberOflives = 3;
         this.score = new Text();
         this.lives = new Text();
-        heartImage = new Image("bilder/hjerte.png", 40, 40, true, false);
+        heartImage = new Image("bilder/hjerte.png", 20, 20, true, false);
         hearts = new ArrayList<>();
-        setMargin(score, new Insets(5, 100, 0, 100));
-        setMargin(lives, new Insets(5, 100, 0, 100));
+        setMargin(score, new Insets(0, 100, 0, 100));
+        setMargin(lives, new Insets(0, 100, 0, 100));
         render();
 
 
@@ -42,8 +42,8 @@ public class StatusLine extends HBox {
         getChildren().clear();
         score.setText("Score: "+points);
         lives.setText("Lives: "+numberOflives);
-        score.setFont(myFont);
-        lives.setFont(myFont);
+      //  score.setFont(myFont);
+      //  lives.setFont(myFont);
 
         getChildren().add(score);
         if(hearts.size() != numberOflives){
