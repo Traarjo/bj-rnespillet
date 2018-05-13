@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
@@ -16,6 +17,8 @@ public class StatusLine extends HBox {
     private Text lives;
     private int numberOflives;
     private int points;
+//    Font myFont = new Font("Serif", 20);
+
 
 
     public StatusLine(){
@@ -39,6 +42,8 @@ public class StatusLine extends HBox {
         getChildren().clear();
         score.setText("Score: "+points);
         lives.setText("Lives: "+numberOflives);
+      //  score.setFont(myFont);
+      //  lives.setFont(myFont);
 
         getChildren().add(score);
         if(hearts.size() != numberOflives){
