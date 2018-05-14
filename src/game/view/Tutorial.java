@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 
 public class Tutorial{
 
-    public Tutorial(){
+    public static void tutorial(){
         Stage stage = new Stage();
         stage.setHeight(Size.height()/2);
         stage.setWidth(Size.width()/2);

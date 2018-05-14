@@ -19,6 +19,7 @@ public class GameMenu {
     private Button newGameButton;
     private Button loadGameButton;
     private Button quitButton;
+    private Button tutorial;
     private GameController gameController;
 
     public GameMenu(GameController gameController, boolean canResumeGame){
@@ -34,6 +35,7 @@ public class GameMenu {
         vbox = new VBox();
         loadGameButton = new Button("Last inn spill");
         newGameButton = new Button("Nytt spill");
+        tutorial = new Button("Tutorial");
         quitButton = new Button("Avslutt");
 
         quitButton.setFont(new Font("arial", 14));
@@ -69,7 +71,7 @@ public class GameMenu {
                 noFile.showAndWait();
             }
         });
-
+        tutorial.setOnAction(e -> Tutorial.tutorial());
 
         quitButton.setOnAction(e -> {
             e.consume();
@@ -93,6 +95,7 @@ public class GameMenu {
         if(gameController.canLoadGame()){
             vbox.getChildren().addAll(loadGameButton);
         }
+        vbox.getChildren().addAll(tutorial);
         vbox.getChildren().addAll(quitButton);
         stage.setScene(new Scene(vbox));
         stage.show();
