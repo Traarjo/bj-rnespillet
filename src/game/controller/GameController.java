@@ -195,7 +195,12 @@ public class GameController {
         }
     }
 
-
+    /**
+     * Singlethread, sørger for at bien beveger seg når spillet er i gang, biens forhåndsbestemte horisontale steglengde trekkes
+     * fra dens nåværende posisjon. Om biens x-posisjon går utenfor spillet, settes den på en ny x-posisjon rett utenfor spillet
+     * på motsatt side (resetter x-posisjonen). Biens y-posisjon bestemmes av Lane klassens metode randomLane()
+     * @return
+     */
     private Runnable beeMover() {
         return () -> {
             if(isGameRunning()){
