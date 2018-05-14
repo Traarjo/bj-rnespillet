@@ -41,7 +41,7 @@ public class GameApplication extends Application {
         StatusLine statusLine = new StatusLine();
         BorderPane borderPane = new BorderPane();
         VBox menuAndScore = new VBox();
-        menuAndScore.getChildren().add(new MainMenu(gameController));
+       // menuAndScore.getChildren().add(new MainMenu(gameController));
         menuAndScore.getChildren().add(statusLine);
         borderPane.setTop(menuAndScore);
         borderPane.setCenter(new Level(gameController, beeImage, honeyImage, statusLine));

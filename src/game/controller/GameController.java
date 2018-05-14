@@ -101,19 +101,14 @@ public class GameController {
                         bear.setLives(Integer.parseInt(tokens[2]));
                         bear.setxPosition(Double.parseDouble(tokens[3]));
                         bear.setyPosition(Double.parseDouble(tokens[4]));
-
-
-
                     }
 
                     else if(tokens[0].equals("Honey")){
                         honeyPots.add(new Honey(honeyImage.getWidth(), honeyImage.getHeight(), Double.parseDouble(tokens[2]), Double.parseDouble(tokens[1])));
-
                     }
 
                     else if(tokens[0].equals("Bee")){
                         bees.add(new Bee(beeImage.getWidth(), beeImage.getHeight(), Double.parseDouble(tokens[2]), Double.parseDouble(tokens[1])));
-
                     }
                 }
                 state.setValue(GameState.RUNNING.toString());
@@ -210,7 +205,6 @@ public class GameController {
                         bee.setyPosition(Lane.randomLane());
                     }
                 });
-
             }
         };
     }
@@ -326,8 +320,6 @@ public class GameController {
                 honeyPots.add(new Honey(honeyImage.getWidth(), honeyImage.getHeight(), Lane.randomLane(), xForNewHoney));
             }
 
-
-
             List<Honey> eatenHoneypots = new ArrayList<>();
             honeyPots.forEach(honey -> {
                 boolean gotEaten = bear.ateHoney(honey);
@@ -336,7 +328,6 @@ public class GameController {
                 }
             });
             honeyPots.removeAll(eatenHoneypots);
-
 
             List<Bee> deadBees = new ArrayList<>();
             bees.forEach(bee -> {
@@ -364,8 +355,6 @@ public class GameController {
         bear = new Bear(bearImage.getWidth(), bearImage.getHeight());
         state.setValue(GameState.RUNNING.toString());
     }
-
-
 
     public boolean isPaused() {
         return state.get().equals(GameState.PAUSED.toString());
