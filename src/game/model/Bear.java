@@ -4,8 +4,10 @@ import game.view.Size;
 import javafx.scene.image.Image;
 
 /**
- *
+ * Her oppretter man bjørnen, og gir den størrelse og verdier.
+ * Sjekke om bjørnen spiser honning eller om den blir stukket av bie, altså kræsj-funksjon
  */
+
 public class Bear {
     public int eatenHoney = 0;
     private int lives;
@@ -73,7 +75,9 @@ public class Bear {
     }
 
 
-
+    /**
+     * Her sjekkes det om x-posisjon, y-posisjon, høyde og vidde er det samme.
+     */
     private boolean xAxisIsInRange(double objectXPosition, double objectWidth) {
         double highestX = this.xPosition + getWidth();
         double highestObjectX = objectXPosition + objectWidth;

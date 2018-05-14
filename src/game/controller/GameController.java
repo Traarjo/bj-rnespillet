@@ -10,7 +10,6 @@ import game.model.*;
 import game.view.GameMenu;
 import game.view.Size;
 import game.view.Lane;
-
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.ParallelTransition;
@@ -20,7 +19,6 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -31,7 +29,6 @@ import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
 import static game.view.Size.windowwidth;
 
 public class GameController {
@@ -45,14 +42,12 @@ public class GameController {
     private Image beeImage;
     private Image honeyImage;
     private Path gameDataFile;
-    /*private List<HighScore> highScores = new ArrayList<>();*/
 
     /**
-     * Setter i gang beeMover() og honeyMover() og sier hvor raskt de skal gå over skjemen.
+     * Setter i gang beeMover() og honeyMover() og sier hvor raskt de skal gå over spillvinduet.
      * @param bearImage tar inn bildet av bjørnen
      * @param beeImage tar inn bildet av bien
      * @param honeyImage tar inn bildet av honning
-     *
      */
     public GameController(Image bearImage, Image beeImage, Image honeyImage) {
         this.bearImage = bearImage;
@@ -65,6 +60,7 @@ public class GameController {
         honeyMover.scheduleAtFixedRate(honeyMover(), 5, 10, TimeUnit.MILLISECONDS);
 
     }
+
 
     public Bear getBear() {
         return bear;
@@ -80,15 +76,6 @@ public class GameController {
         }
     }
 
-    /*public void addHighScore(HighScore score){
-        highScores.add(score);
-        Collections.sort(highScores, (o1, o2) -> Integer.compare(o2.getScore(), o1.getScore()));
-
-    }
-
-    public List<HighScore> getHighScores(){
-        return highScores;
-    } */
 
     public StringProperty getState() {
         return state;
@@ -103,7 +90,7 @@ public class GameController {
     }
 
     /**
-     * Henter opp og loader spillet fra filen som er lagret. 
+     * Henter opp og loader spillet fra filen som er lagret.
      */
     public void loadGame(){
         if(canLoadGame()){
@@ -208,6 +195,7 @@ public class GameController {
         }
     }
 
+
     private Runnable beeMover() {
         return () -> {
             if(isGameRunning()){
@@ -276,7 +264,9 @@ public class GameController {
         return state.get().equals(GameState.RUNNING.toString());
     }
 
-
+    /**
+     * Metoder for å flytte bjørnen opp, ned og til sidene.
+     */
    public void moveBearUp() {
         double current = bear.getyPosition();
         double newPosition = current - bear.verticalStepLength();
@@ -314,6 +304,10 @@ public class GameController {
         return bees;
     }
 
+    /**
+     * Spillet er over om bjørnen har 0 liv igjen.
+     * @return true
+     */
     public boolean isGameOver(){
         if (bear == null ||  bear.getLives() <= 0) {
             return true;
