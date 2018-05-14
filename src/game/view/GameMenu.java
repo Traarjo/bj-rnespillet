@@ -20,6 +20,8 @@ public class GameMenu {
 
     public GameMenu(GameController gameController, boolean canResumeGame){
         Stage stage = new Stage();
+        stage.setHeight(Size.height()/2);
+        stage.setWidth(Size.width()/2);
         stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Meny");
