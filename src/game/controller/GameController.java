@@ -4,9 +4,15 @@ import game.model.*;
 import game.view.GameMenu;
 import game.view.Size;
 
+import javafx.animation.Animation;
+import javafx.animation.Interpolator;
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -19,6 +25,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import static game.view.Size.windowwidth;
 
 public class GameController {
     private Bear bear;
@@ -43,7 +51,7 @@ public class GameController {
         beeMover = Executors.newSingleThreadScheduledExecutor();
         beeMover.scheduleAtFixedRate(beeMover(), 7, 7, TimeUnit.MILLISECONDS);
         honeyMover = Executors.newSingleThreadScheduledExecutor();
-        honeyMover.scheduleAtFixedRate(honeyMover(), 10, 10, TimeUnit.MILLISECONDS);
+        honeyMover.scheduleAtFixedRate(honeyMover(), 5, 10, TimeUnit.MILLISECONDS);
 
     }
 
@@ -190,7 +198,7 @@ public class GameController {
                     if (newPosition > -beeImage.getWidth()) {
                         bee.setxPosition(newPosition);
                     } else {
-                        bee.setxPosition(Size.windowwidth+beeImage.getWidth());
+                        bee.setxPosition(windowwidth+beeImage.getWidth());
                     }
                 });
 
@@ -207,13 +215,41 @@ public class GameController {
                     if (newPosition > -honeyImage.getWidth()) {
                         honey.setxPosition(newPosition);
                     } else {
-                        honey.setxPosition(Size.windowwidth+honeyImage.getWidth());
+                        honey.setxPosition(windowwidth+honeyImage.getWidth());
                     }
                 });
 
             }
         };
     }
+
+    public void loopTrees(ImageView trees1, ImageView trees2) {
+        ParallelTransition parallelTransition;
+
+        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(8000), trees1);
+        trees1.setFitWidth(windowwidth * 2.7);
+        trees1.setFitHeight(windowwidth/3.4);
+        translateTransition.setFromX(0);
+        translateTransition.setToX(-3 * windowwidth);
+        translateTransition.setInterpolator(Interpolator.LINEAR);
+
+        TranslateTransition translateTransition2 = new TranslateTransition(Duration.millis(8000), trees2);
+        trees2.setFitWidth(windowwidth * 2.7);
+        trees2.setFitHeight(windowwidth/3.4);
+        translateTransition2.setFromX(0);
+        translateTransition2.setToX(-3 * windowwidth);
+        translateTransition2.setInterpolator(Interpolator.LINEAR);
+
+
+        parallelTransition = new ParallelTransition(translateTransition/*, translateTransition2*/);
+        parallelTransition.setCycleCount(Animation.INDEFINITE);
+        parallelTransition.play();
+
+       /* if (!isGameRunning()){
+            parallelTransition.stop();
+        }*/
+    }
+
 
     public boolean isGameRunning() {
         return state.get().equals(GameState.RUNNING.toString());
@@ -244,7 +280,7 @@ public class GameController {
     public void moveBearRight() {
         double current = bear.getxPosition();
         double newPosition = current + bear.horizontalStepLength();
-        if (newPosition < (Size.windowwidth - bear.getWidth())) {
+        if (newPosition < (windowwidth - bear.getWidth())) {
             bear.setxPosition(newPosition);
         }
     }
