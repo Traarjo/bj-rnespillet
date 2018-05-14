@@ -315,7 +315,10 @@ public class GameController {
     }
 
     public boolean isGameOver(){
-         return bear == null ||  bear.getLives() <= 0;
+        if (bear == null ||  bear.getLives() <= 0) {
+            return true;
+        }
+        return false;
     }
 
 
