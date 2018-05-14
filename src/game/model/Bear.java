@@ -4,7 +4,7 @@ import game.view.Size;
 import javafx.scene.image.Image;
 
 /**
- * Her oppretter man bjørnen, og gir den størrelse og verdier.
+ * Her oppretter man bjørnen, og gir den størrelse, posisjon og andre verdier.
  * Sjekke om bjørnen spiser honning eller om den blir stukket av bie, altså kræsj-funksjon
  */
 
