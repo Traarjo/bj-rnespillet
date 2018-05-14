@@ -9,7 +9,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import game.controller.GameController;
 import game.model.Bear;
-import javafx.scene.text.Text;
 
 import static java.lang.Thread.sleep;
 
@@ -82,12 +81,21 @@ public class Level extends Pane {
 
     }
 
-    private ImageView createTrees() {
+    private ImageView createTrees2() {
         ImageView trees = new ImageView("bilder/trees.png");
         trees.setPickOnBounds(true);
         trees.setPreserveRatio(true);
         trees.setFitWidth(2700);
         return trees;
+    }
+
+    private ImageView createTrees() {
+        ImageView trees1 = new ImageView("bilder/trees.png");
+        ImageView trees2 = new ImageView("bilder/trees.png");
+        gameController.loopTrees(trees1, trees2);
+        return trees1;
+
+
     }
 
     private void render() {
