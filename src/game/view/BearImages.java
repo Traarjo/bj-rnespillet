@@ -56,7 +56,11 @@ public class BearImages {
         return new Image(filename, Size.windowwidth / 6, Size.windowheight / 5, true, false);
     }
 
-
+    /**
+     * Her vises hvor mange honning bjørnen må spise for å bytte til ny bjørn
+     * @param eatenHoney tar inn hvor mange honning som er spist
+     * @return bilder blir returnert, ut ifra hva som er sant
+     */
     public Image getBearImage(int eatenHoney) {
         if (eatenHoney < 10) {
             return bearImage;
@@ -81,6 +85,11 @@ public class BearImages {
         }
     }
 
+    /**
+     * Her vises hvor mange honning bjørnen må spise for å bytte til ny bjørn
+     * @param eatenHoney tar inn hvor mange honning som er spist
+     * @return bilder blir returnert, ut ifra hva som er sant
+     */
 
     public Image getBearImage2(int eatenHoney) {
         if (eatenHoney < 10) {

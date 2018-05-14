@@ -195,6 +195,7 @@ public class GameController {
         }
     }
 
+
     private Runnable beeMover() {
         return () -> {
             if(isGameRunning()){
