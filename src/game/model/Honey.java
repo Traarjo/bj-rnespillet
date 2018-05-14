@@ -1,5 +1,9 @@
 package game.model;
 
+/**
+ * Her settes honning sine verdier, x-posisisjon, y-posisjon, høyde, bredde.
+ */
+
 public class Honey {
     private double xPosition;
     private double yPosition;

@@ -103,7 +103,7 @@ public class GameController {
     }
 
     /**
-     * Henter opp og loader spillet fra filen som er lagret. 
+     * Henter opp og loader spillet fra filen som er lagret.
      */
     public void loadGame(){
         if(canLoadGame()){

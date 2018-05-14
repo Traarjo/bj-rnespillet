@@ -1,5 +1,9 @@
 package game.model;
 
+/**
+ * Her settes bien sine verdier, x-posisisjon, y-posisjon, høyde, bredde.
+ */
+
 public class Bee {
     private double xPosition;
     private double yPosition;
