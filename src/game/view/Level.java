@@ -1,5 +1,6 @@
 package game.view;
 
+
 import game.model.GameState;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
@@ -10,6 +11,13 @@ import javafx.scene.layout.Pane;
 import game.controller.GameController;
 import game.model.Bear;
 
+
+/**
+ * Level inneholder animasjonstråden som får bjørnen til å løpe
+ * Tegner bie og honning
+ * Inneholder render(), som er den som tegner alt
+ * Styrer AnimationTimer ut i fra spillet sin state
+ */
 
 public class Level extends Pane {
     private GameController gameController;
@@ -24,6 +32,14 @@ public class Level extends Pane {
     private BearImages bearImages;
     private StatusLine statusLine;
 
+    /**
+     *
+     * @param gameController tar inn gameController
+     * @param beeImage tar inn biebildet
+     * @param honeyImage tar inn bildet av honning
+     * @param statusLine tar inn statuslinjen
+     *
+     */
     public Level(GameController gameController, Image beeImage, Image honeyImage,
                  StatusLine statusLine) {
         this.gameController = gameController;
@@ -85,6 +101,7 @@ public class Level extends Pane {
 
     }
 
+
     private void render() {
         gc.clearRect(0, 0, Size.windowwidth, Size.windowheight);
         Bear bear = gameController.getBear();
@@ -120,7 +137,6 @@ public class Level extends Pane {
                 }
 
             }
-
         });
     }
 }
