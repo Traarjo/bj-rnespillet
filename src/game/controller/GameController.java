@@ -16,7 +16,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -62,7 +61,7 @@ public class GameController {
         }
     }
 
-    public void addHighScore(HighScore score){
+    /*public void addHighScore(HighScore score){
         highScores.add(score);
         Collections.sort(highScores, (o1, o2) -> Integer.compare(o2.getScore(), o1.getScore()));
 
@@ -70,7 +69,7 @@ public class GameController {
 
     public List<HighScore> getHighScores(){
         return highScores;
-    }
+    } */
 
     public StringProperty getState() {
         return state;
