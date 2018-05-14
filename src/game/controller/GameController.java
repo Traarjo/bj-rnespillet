@@ -45,7 +45,6 @@ public class GameController {
     private Image beeImage;
     private Image honeyImage;
     private Path gameDataFile;
-    /*private List<HighScore> highScores = new ArrayList<>();*/
 
     /**
      * Setter i gang beeMover() og honeyMover() og sier hvor raskt de skal gå over skjemen.
@@ -80,15 +79,6 @@ public class GameController {
         }
     }
 
-    /*public void addHighScore(HighScore score){
-        highScores.add(score);
-        Collections.sort(highScores, (o1, o2) -> Integer.compare(o2.getScore(), o1.getScore()));
-
-    }
-
-    public List<HighScore> getHighScores(){
-        return highScores;
-    } */
 
     public StringProperty getState() {
         return state;

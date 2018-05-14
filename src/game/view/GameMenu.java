@@ -18,7 +18,6 @@ public class GameMenu {
     private VBox vbox;
     private Button newGameButton;
     private Button loadGameButton;
-    /*private Button scoreboardButton;*/
     private Button quitButton;
     private GameController gameController;
 
@@ -35,7 +34,6 @@ public class GameMenu {
         vbox = new VBox();
         loadGameButton = new Button("Last inn spill");
         newGameButton = new Button("Nytt spill");
-        /*scoreboardButton = new Button("Poengtavle");*/
         quitButton = new Button("Avslutt");
 
         quitButton.setFont(new Font("arial", 14));
@@ -73,14 +71,6 @@ public class GameMenu {
         });
 
 
-        /**
-         * Her er kode til en knapp som skal gå til en liste over High Scores, som vi ikke fikk tid til å gjøre ferdig.
-         */
-        /*scoreboardButton.setOnAction(e -> {
-            e.consume();
-            new HighScoreView(gameController.getHighScores());
-        });*/
-
         quitButton.setOnAction(e -> {
             e.consume();
             gameController.exit();
@@ -100,7 +90,7 @@ public class GameMenu {
         if(gameController.canLoadGame()){
             vbox.getChildren().addAll(loadGameButton);
         }
-        vbox.getChildren().addAll(quitButton); //Her skal scoreboardButton inn
+        vbox.getChildren().addAll(quitButton);
         stage.setScene(new Scene(vbox));
         stage.show();
     }

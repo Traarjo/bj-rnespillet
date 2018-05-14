@@ -32,10 +32,6 @@ public class StatusLine extends HBox {
         setMargin(lives, new Insets(0, 100, 0, 100));
         render();
 
-
-
-
-
     }
 
     private void render(){
