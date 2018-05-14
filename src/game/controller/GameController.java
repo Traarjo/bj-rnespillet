@@ -273,10 +273,10 @@ public class GameController {
         else {
             Random random = new Random();
 
-            List<Integer> xValuesBee = Arrays.asList(20, 200, 350, 500, 650, 770);
+            List<Integer> xValue = Arrays.asList(100, 250, 400, 550, 700, 850);
 
             //Bier
-            double xForNewBee = xValuesBee.get(random.nextInt(6))+Size.width();
+            double xForNewBee = xValue.get(random.nextInt(6))+Size.width();
 
             if (bees.size() < 3 && bees.stream()
                     .noneMatch(bee -> bee.getxPosition() == xForNewBee && bee.getyPosition() == Lane.randomLane())) {
@@ -284,7 +284,7 @@ public class GameController {
             }
 
             //Honning
-            double xForNewHoney = xValuesBee.get(random.nextInt(6))+Size.width();
+            double xForNewHoney = xValue.get(random.nextInt(6))+Size.width();
 
             if (honeyPots.size() < 4 && honeyPots.stream()
                     .noneMatch(honey -> honey.getxPosition() == xForNewHoney && honey.getyPosition() == Lane.randomLane())) {
