@@ -3,6 +3,8 @@ package game.view;
 /**
  * JavaFX
  * Alertboks som kommer opp når man trykker x i hjørnet for å avslutte spillet.
+ * Klikk på "ja" avslutter hele programmet
+ * @author Tara Jørgensen
  */
 
 import javafx.scene.Scene;

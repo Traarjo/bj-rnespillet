@@ -117,7 +117,6 @@ public class Level extends Pane {
                     } catch (InterruptedException ignored) {
                     }
                 }
-
             }
         });
     }

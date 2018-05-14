@@ -40,18 +40,18 @@ public class Bear {
         return yPosition;
     }
 
+    public void setEatenHoney(int eatenHoney) {
+        this.eatenHoney = eatenHoney;
+    }
     public int getEatenHoney() {
         return eatenHoney;
     }
 
-    public void setEatenHoney(int eatenHoney){ this.eatenHoney = eatenHoney;}
-
-    public int getLives() {
-        return lives;
-    }
-
     public void setLives(int lives) {
         this.lives = lives;
+    }
+    public int getLives() {
+        return lives;
     }
 
     public boolean checkIfGotStungBy(Bee bee) {
@@ -101,9 +101,6 @@ public class Bear {
     }
     public double getHeight() {
         return height;
-    }
-    public double startPosition() {
-        return height * 2.5;
     }
     public double horizontalStepLength() {
         return width / 5;
