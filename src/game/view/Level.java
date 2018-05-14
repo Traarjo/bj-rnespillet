@@ -6,9 +6,14 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import game.controller.GameController;
 import game.model.Bear;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
 import static java.lang.Thread.sleep;
 
@@ -48,16 +53,7 @@ public class Level extends Pane {
             } else if (currentState.equals(GameState.PAUSED.toString())) {
                 timer.stop();
                 if (gameController.isGameOver()) {
-                    /*HBox hBox = new HBox();
-                    hBox.setTranslateX(Size.windowwidth / 3);
-                    hBox.setTranslateY(Size.windowwidth / 4);
-                    getChildren().add(hBox);
 
-
-                    Text text = new Text("Game Over");
-                    text.setFont(Font.font("Avenir Next", FontWeight.BOLD, 55));
-                    text.setFill(Color.GREEN);
-                    hBox.getChildren().add(text);*/
                 }
             } else if (gameController.isGameRunning()) {
                 timer.start();

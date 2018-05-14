@@ -321,13 +321,12 @@ public class GameController {
             //Honning
             double xForNewHoney = xValue.get(random.nextInt(6))+Size.width();
 
-            if (honeyPots.size() < 4 && honeyPots.stream()
+            if (honeyPots.size() < 6 && honeyPots.stream()
                     .noneMatch(honey -> honey.getxPosition() == xForNewHoney && honey.getyPosition() == Lane.randomLane())) {
                 honeyPots.add(new Honey(honeyImage.getWidth(), honeyImage.getHeight(), Lane.randomLane(), xForNewHoney));
             }
 
-           /* List<Honey> eatenHoney = honeyPots.stream().filter(honey -> bear.ateHoney(honey)).collect(Collectors.toList());
-            honeyPots.removeAll(eatenHoney);*/
+
 
             List<Honey> eatenHoneypots = new ArrayList<>();
             honeyPots.forEach(honey -> {

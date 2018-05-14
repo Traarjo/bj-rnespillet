@@ -37,7 +37,7 @@ public class HighScoreView {
         ok.setOnAction(e -> stage.close());
 
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(header, scores, ok); // Legger til tekst over knappene
+        vBox.getChildren().addAll(header, scores, ok);
         stage.setScene(new Scene(vBox));
 
         stage.showAndWait();
