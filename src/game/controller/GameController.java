@@ -199,7 +199,7 @@ public class GameController {
      * Singlethread, sørger for at bien beveger seg når spillet er i gang, biens forhåndsbestemte horisontale steglengde trekkes
      * fra dens nåværende posisjon. Om biens x-posisjon går utenfor spillet, settes den på en ny x-posisjon rett utenfor spillet
      * på motsatt side (resetter x-posisjonen). Biens y-posisjon bestemmes av Lane klassens metode randomLane()
-     * @return
+     *
      */
     private Runnable beeMover() {
         return () -> {
@@ -219,6 +219,11 @@ public class GameController {
         };
     }
 
+    /**
+     * Singlethread, samme metode som over, bare for honningen. Valgte denne måten for å enkelt velge hastigheten
+     * til bien og honningen separat.
+     *
+     */
     private Runnable honeyMover(){
         return () -> {
             if(isGameRunning()){
@@ -296,7 +301,8 @@ public class GameController {
 
     /**
      * Funksjonalitet som oppdateres hele tiden.
-     * Viser hvor honning og bier kan legge seg på brettet, hvor mange det kan være, og sier at om man spiser honning/blir stukket av bie, så skal honning/bie forsvinne fra brettet.
+     * Viser hvor honning og bier kan legge seg på brettet, hvor mange det kan være, og sier at om man spiser honning/blir
+     * stukket av bie, så skal honning/bie forsvinne fra brettet. Setter animasjonene på pause om gamestaten er pauset.
      */
     public  synchronized void updateGameState() {
         if(isGameOver()){

@@ -6,7 +6,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-
+/**
+ * Klasse som inneholder de alternative y posisjonene til honning og bier.
+ * @return en tilfeldig y posisjon/lane
+ */
 public class Lane {
 
     public static double randomLane() {
