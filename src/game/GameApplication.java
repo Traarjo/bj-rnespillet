@@ -1,5 +1,11 @@
 package game;
 
+/**
+ * GameApplication opprettes selvet brettet med elementene. Inneholder koden for bevegelsen av bjørn
+ * Her velger vi hvilke bilder som brukes i GameControlleren.
+ *
+ */
+
 import game.view.*;
 import javafx.application.Application;
 import javafx.event.EventHandler;

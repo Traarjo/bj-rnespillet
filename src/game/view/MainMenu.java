@@ -1,5 +1,11 @@
 package game.view;
 
+/**
+ * JavaFX
+ * Inneholder en alertboks som fungerer som en hovedmeny. Kommer når man starter programmet og når man pauser spillet.
+ * Har også menybaren i spillet.
+ */
+
 import game.model.GameState;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;

@@ -1,5 +1,10 @@
 package game.view;
 
+/**
+ * JavaFX
+ * Alertboks som kommer opp når man velger "Om" i kategorien "Hjelp" fra navigasjonsmenyen. Forklarer hvordan spillet fungerer.
+ */
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

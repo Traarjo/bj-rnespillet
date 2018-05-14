@@ -1,5 +1,9 @@
 package game.view;
 
+/**
+ * Inneholder koden til statuslinjen som printer ut poengsum og antall liv.
+ */
+
 import javafx.geometry.Insets;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

@@ -1,5 +1,10 @@
 package game;
 
+/**
+ * Main metode, kjører GameApplication
+ *
+ */
+
 import javafx.application.Application;
 
 public class Main {
