@@ -15,7 +15,7 @@ public class Bear {
     private double yPosition;
     private double width;
     private double height;
-    Image bear_img = new Image("bilder/B1Preview.png", Size.windowwidth / 6, Size.windowheight / 5, true, false);
+    Image bear_img = new Image("bilder/B1R.png", Size.windowwidth / 6, Size.windowheight / 5, true, false);
 
     public Bear(double width, double height) {
         this.xPosition = bear_img.getWidth() * 2;
@@ -40,18 +40,18 @@ public class Bear {
         return yPosition;
     }
 
+    public void setEatenHoney(int eatenHoney) {
+        this.eatenHoney = eatenHoney;
+    }
     public int getEatenHoney() {
         return eatenHoney;
     }
 
-    public void setEatenHoney(int eatenHoney){ this.eatenHoney = eatenHoney;}
-
-    public int getLives() {
-        return lives;
-    }
-
     public void setLives(int lives) {
         this.lives = lives;
+    }
+    public int getLives() {
+        return lives;
     }
 
     public boolean checkIfGotStungBy(Bee bee) {
@@ -101,9 +101,6 @@ public class Bear {
     }
     public double getHeight() {
         return height;
-    }
-    public double startPosition() {
-        return height * 2.5;
     }
     public double horizontalStepLength() {
         return width / 5;

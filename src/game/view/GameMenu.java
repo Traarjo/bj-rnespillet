@@ -75,6 +75,9 @@ public class GameMenu {
             e.consume();
             gameController.exit();
         });
+        /**
+         * Om spillet er pauset og man kan resume det, står det "Lagre og Avslutt" istedenfor bare "Avslutt"
+         */
         if (canResumeGame){
             quitButton.setText("Lagre og Avslutt");
             Button continueGameButton = new Button("Fortsett");

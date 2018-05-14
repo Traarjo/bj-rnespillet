@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Klasse som inneholder de alternative y posisjonene til honning og bier.
- * @return en tilfeldig y posisjon/lane
+ * Klasse som inneholder de alternative Y-posisjonene til honning og bier.
+ * @return en tilfeldig Y posisjon/lane
+ * @author Tara Jørgensen
  */
 public class Lane {
 
