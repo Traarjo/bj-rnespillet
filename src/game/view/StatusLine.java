@@ -18,9 +18,6 @@ public class StatusLine extends HBox {
     private Text gameOver;
     private int numberOflives;
     private int points;
-//    Font myFont = new Font("Serif", 20);
-
-
 
     public StatusLine(){
         this.points = 0;
@@ -40,8 +37,6 @@ public class StatusLine extends HBox {
         getChildren().clear();
         score.setText("Score: "+points);
         lives.setText("Lives: "+numberOflives);
-      //  score.setFont(myFont);
-      //  lives.setFont(myFont);
 
         getChildren().add(score);
         if(hearts.size() != numberOflives){
@@ -63,8 +58,6 @@ public class StatusLine extends HBox {
         if(lives != numberOflives){
             numberOflives = lives;
             render();
-
-
         }
 
     }
@@ -74,7 +67,6 @@ public class StatusLine extends HBox {
             points = score;
             render();
         }
-
 
     }
 }

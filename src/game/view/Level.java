@@ -15,8 +15,6 @@ public class Level extends Pane {
     private GameController gameController;
     private Image bearImage;
     private Image bearImage2;
-
-
     private Image beeImage;
     private Image honeyImage;
     private GraphicsContext gc;
