@@ -13,11 +13,14 @@ import javafx.stage.Stage;
 public class CloseWindow {
     public static void close() {
         Stage close = new Stage();
+        close.setHeight(Size.height()/2);
+        close.setWidth(Size.width()/2);
+        close.setResizable(false);
         close.initModality(Modality.APPLICATION_MODAL);
         close.setTitle("Lukk programmet?");
         close.getIcons().add(new Image("bilder/icon_bear.png"));
 
-        Label sikker = new Label("Er du sikker på at du vil lukke programmet?");
+        Label header = new Label("Er du sikker på at du vil lukke programmet?");
         Label info = new Label("Spillet vil ikke bli lagret.");
 
         Button yes = new Button ("Ja");
@@ -28,13 +31,10 @@ public class CloseWindow {
         HBox hBox = new HBox();
         hBox.getChildren().addAll(yes, no); // Legger til knapper
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(sikker, info, hBox); // Legger til tekst over knappene
-        StackPane layout = new StackPane();
-        layout.getChildren().add(vBox);
+        vBox.getChildren().addAll(header, info, hBox); // Legger til tekst over knappene
 
-        Scene scene = new Scene (layout, Size.windowwidth/2.5, Size.windowheight/2.5);
-        close.setScene(scene);
-        close.setResizable(false);
+        close.setScene(new Scene(vBox));
+
         close.showAndWait();
     }
 }
