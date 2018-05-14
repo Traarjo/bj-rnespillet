@@ -15,6 +15,7 @@ public class StatusLine extends HBox {
     private List<ImageView> hearts;
     private Text score;
     private Text lives;
+    private Text gameOver;
     private int numberOflives;
     private int points;
 //    Font myFont = new Font("Serif", 20);
@@ -26,6 +27,7 @@ public class StatusLine extends HBox {
         this.numberOflives = 3;
         this.score = new Text();
         this.lives = new Text();
+        this.gameOver = new Text();
         heartImage = new Image("bilder/hjerte.png", 20, 20, true, false);
         hearts = new ArrayList<>();
         setMargin(score, new Insets(0, 100, 0, 100));
@@ -51,12 +53,14 @@ public class StatusLine extends HBox {
             for(int i = 1; i <= numberOflives; i++){
                 hearts.add(new ImageView(heartImage));
             }
-
         }
         getChildren().add(lives);
         getChildren().addAll(hearts);
-
-
+        if (hearts.size() <=0) {
+            gameOver.setText("Spiller er over");
+            getChildren().remove(lives);
+            getChildren().add(gameOver);
+        }
     }
 
     public void lives(int lives){
