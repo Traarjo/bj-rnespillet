@@ -1,6 +1,5 @@
 package game.view;
 
-import game.model.*;
 import javafx.scene.image.Image;
 
 import java.util.Arrays;

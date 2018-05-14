@@ -1,5 +1,10 @@
 package game.view;
 
+/**
+ * Koden som skal vise listen med High scores.
+ * Ikke ferdig.
+ */
+
 import game.model.HighScore;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -32,7 +37,7 @@ public class HighScoreView {
         ok.setOnAction(e -> stage.close());
 
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(header, scores, ok); // Legger til tekst over knappene
+        vBox.getChildren().addAll(header, scores, ok);
         stage.setScene(new Scene(vBox));
 
         stage.showAndWait();

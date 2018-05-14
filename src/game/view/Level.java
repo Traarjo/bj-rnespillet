@@ -10,7 +10,6 @@ import javafx.scene.layout.Pane;
 import game.controller.GameController;
 import game.model.Bear;
 
-import static java.lang.Thread.sleep;
 
 public class Level extends Pane {
     private GameController gameController;
@@ -48,17 +47,7 @@ public class Level extends Pane {
             } else if (currentState.equals(GameState.PAUSED.toString())) {
                 timer.stop();
                 if (gameController.isGameOver()) {
-                    //TODO show scoeboard..
-                    /*HBox hBox = new HBox();
-                    hBox.setTranslateX(Size.windowwidth / 3);
-                    hBox.setTranslateY(Size.windowwidth / 4);
-                    getChildren().add(hBox);
 
-
-                    Text text = new Text("Game Over");
-                    text.setFont(Font.font("Avenir Next", FontWeight.BOLD, 55));
-                    text.setFill(Color.GREEN);
-                    hBox.getChildren().add(text);*/
                 }
             } else if (gameController.isGameRunning()) {
                 timer.start();

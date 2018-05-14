@@ -1,5 +1,9 @@
 package game.view;
 
+/**
+ * GameMenu-klassen inneholder den dataen som skal vises i menyen før spillet startes, og når det er pauset.
+ */
+
 import game.controller.GameController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,8 +18,7 @@ public class GameMenu {
     private VBox vbox;
     private Button newGameButton;
     private Button loadGameButton;
-    private Button galleryButton;
-    private Button scoreboardButton;
+    /*private Button scoreboardButton;*/
     private Button quitButton;
     private GameController gameController;
 
@@ -30,12 +33,9 @@ public class GameMenu {
 
         this.gameController = gameController;
         vbox = new VBox();
-        //<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-
         loadGameButton = new Button("Last inn spill");
         newGameButton = new Button("Nytt spill");
-        galleryButton = new Button("Galleri");
-        scoreboardButton = new Button("Poengtavle");
+        /*scoreboardButton = new Button("Poengtavle");*/
         quitButton = new Button("Avslutt");
 
         quitButton.setFont(new Font("arial", 14));
@@ -71,14 +71,16 @@ public class GameMenu {
                 noFile.showAndWait();
             }
         });
-        galleryButton.setOnAction(e -> {
-            e.consume();
-            //TODO
-        });
-        scoreboardButton.setOnAction(e -> {
+
+
+        /**
+         * Her er kode til en knapp som skal gå til en liste over High Scores, som vi ikke fikk tid til å gjøre ferdig.
+         */
+        /*scoreboardButton.setOnAction(e -> {
             e.consume();
             new HighScoreView(gameController.getHighScores());
-        });
+        });*/
+
         quitButton.setOnAction(e -> {
             e.consume();
             gameController.exit();
@@ -98,7 +100,7 @@ public class GameMenu {
         if(gameController.canLoadGame()){
             vbox.getChildren().addAll(loadGameButton);
         }
-        vbox.getChildren().addAll(galleryButton, scoreboardButton,quitButton);
+        vbox.getChildren().addAll(quitButton); //Her skal scoreboardButton inn
         stage.setScene(new Scene(vbox));
         stage.show();
     }

@@ -1,5 +1,11 @@
 package game.controller;
 
+/**
+ * GameController
+ *
+ *
+ */
+
 import game.model.*;
 import game.view.GameMenu;
 import game.view.Size;
@@ -22,7 +28,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -40,10 +45,15 @@ public class GameController {
     private Image beeImage;
     private Image honeyImage;
     private Path gameDataFile;
-    private List<HighScore> highScores = new ArrayList<>();
+    /*private List<HighScore> highScores = new ArrayList<>();*/
 
-
-
+    /**
+     * Setter i gang beeMover() og honeyMover() og sier hvor raskt de skal gå over skjemen.
+     * @param bearImage tar inn bildet av bjørnen
+     * @param beeImage tar inn bildet av bien
+     * @param honeyImage tar inn bildet av honning
+     *
+     */
     public GameController(Image bearImage, Image beeImage, Image honeyImage) {
         this.bearImage = bearImage;
         this.beeImage = beeImage;
@@ -70,7 +80,7 @@ public class GameController {
         }
     }
 
-    public void addHighScore(HighScore score){
+    /*public void addHighScore(HighScore score){
         highScores.add(score);
         Collections.sort(highScores, (o1, o2) -> Integer.compare(o2.getScore(), o1.getScore()));
 
@@ -78,7 +88,7 @@ public class GameController {
 
     public List<HighScore> getHighScores(){
         return highScores;
-    }
+    } */
 
     public StringProperty getState() {
         return state;
@@ -92,7 +102,9 @@ public class GameController {
         System.exit(0);
     }
 
-
+    /**
+     * Henter opp og loader spillet fra filen som er lagret. 
+     */
     public void loadGame(){
         if(canLoadGame()){
             String currentLine;
@@ -139,6 +151,9 @@ public class GameController {
         return Files.exists(gameDataFile);
     }
 
+    /**
+     * Lagrer fil med x og y posisjonen til bjørnen, biene og honningen, samt score og liv.
+     */
     private void saveGameState() {
        if(!isGameOver()){
            try {
@@ -181,6 +196,9 @@ public class GameController {
        }
     }
 
+    /**
+     * Sletter fil, om det eksisterer en fil fra før.
+     */
     private void deleteGameFile()  {
         if(Files.exists(gameDataFile)){
             try {
@@ -303,7 +321,12 @@ public class GameController {
         return false;
     }
 
-    //dele opp denne?
+
+
+    /**
+     * Funksjonalitet som oppdateres hele tiden.
+     * Viser hvor honning og bier kan legge seg på brettet, hvor mange det kan være, og sier at om man spiser honning/blir stukket av bie, så skal honning/bie forsvinne fra brettet.
+     */
     public  synchronized void updateGameState() {
         if(isGameOver()){
           pause();
@@ -325,13 +348,12 @@ public class GameController {
             //Honning
             double xForNewHoney = xValue.get(random.nextInt(6))+Size.width();
 
-            if (honeyPots.size() < 4 && honeyPots.stream()
+            if (honeyPots.size() < 6 && honeyPots.stream()
                     .noneMatch(honey -> honey.getxPosition() == xForNewHoney && honey.getyPosition() == Lane.randomLane())) {
                 honeyPots.add(new Honey(honeyImage.getWidth(), honeyImage.getHeight(), Lane.randomLane(), xForNewHoney));
             }
 
-           /* List<Honey> eatenHoney = honeyPots.stream().filter(honey -> bear.ateHoney(honey)).collect(Collectors.toList());
-            honeyPots.removeAll(eatenHoney);*/
+
 
             List<Honey> eatenHoneypots = new ArrayList<>();
             honeyPots.forEach(honey -> {
@@ -354,6 +376,11 @@ public class GameController {
         }
     }
 
+    /**
+     * Når nytt spill startes, skal en evt. eksisterende fil slettes først.
+     * Bier og honning tømmes fra brettet, og man tegner en ny bjørn.
+     * Så settes spillet i gang, spillet oppdateres. 
+     */
     public void newGame() {
         deleteGameFile();
         if (isGameRunning()){
