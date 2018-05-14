@@ -1,5 +1,10 @@
 package game.view;
 
+/**
+ * BearImages inneholder alle bjørnebildene, og en if-else-metode for å få den til animasjonen og å bytte bjørn når man får x antall poeng.
+ *
+ */
+
 import javafx.scene.image.Image;
 
 public class BearImages {
