@@ -3,6 +3,7 @@ package game.view;
 /**
  * JavaFX
  * Alertboks som kommer opp når man velger "Om" i kategorien "Hjelp" fra navigasjonsmenyen. Forklarer hvordan spillet fungerer.
+ * @author Tara Jørgensen
  */
 
 import javafx.scene.Scene;

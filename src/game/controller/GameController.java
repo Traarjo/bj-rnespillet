@@ -2,7 +2,9 @@ package game.controller;
 
 /**
  * GameController
- *
+ *Denne klassen sørger for funksjonen til objektene som blir plassert i GameApplication.
+ * Movement-metoder for bjørn, bie og honning, samt lagring og lasting fra fil
+ * Pause-metoden ligger også her.
  *
  */
 
@@ -10,15 +12,9 @@ import game.model.*;
 import game.view.GameMenu;
 import game.view.Size;
 import game.view.Lane;
-import javafx.animation.Animation;
-import javafx.animation.Interpolator;
-import javafx.animation.ParallelTransition;
-import javafx.animation.TranslateTransition;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.util.Duration;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;

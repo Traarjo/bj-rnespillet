@@ -1,8 +1,8 @@
 package game.view;
 
 /**
- * Inneholder størrelser som brukes til å skalere objekter i forhold til oppløsning.
- *
+ * Inneholder størrelser som brukes til å skalere objekter i forhold til brukerens oppløsning.
+ * @author Tara Jørgensen
  */
 
 import javafx.geometry.Rectangle2D;

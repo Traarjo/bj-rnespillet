@@ -51,6 +51,9 @@ public class StatusLine extends HBox {
         }
         getChildren().add(lives);
         getChildren().addAll(hearts);
+        /**
+         * Om man ikke har flere liv igjen dukker teksten "Spillet er over" der hvor antall liv pleide å stå
+         */
         if (hearts.size() <=0) {
             gameOver.setText("Spillet er over");
             getChildren().remove(lives);
