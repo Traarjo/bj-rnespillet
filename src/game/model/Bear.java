@@ -15,7 +15,7 @@ public class Bear {
     private double yPosition;
     private double width;
     private double height;
-    Image bear_img = new Image("bilder/B1Preview.png", Size.windowwidth / 6, Size.windowheight / 5, true, false);
+    Image bear_img = new Image("bilder/B1R.png", Size.windowwidth / 6, Size.windowheight / 5, true, false);
 
     public Bear(double width, double height) {
         this.xPosition = bear_img.getWidth() * 2;
