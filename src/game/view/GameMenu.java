@@ -84,6 +84,7 @@ public class GameMenu {
             gameController.exit();
         });
         if (canResumeGame){
+            quitButton.setText("Lagre og Avslutt");
             Button continueGameButton = new Button("Fortsett");
             continueGameButton.setOnAction(e -> {
                 e.consume();
