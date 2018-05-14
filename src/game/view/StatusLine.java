@@ -53,7 +53,7 @@ public class StatusLine extends HBox {
         getChildren().add(lives);
         getChildren().addAll(hearts);
         if (hearts.size() <=0) {
-            gameOver.setText("Spiller er over");
+            gameOver.setText("Spillet er over");
             getChildren().remove(lives);
             getChildren().add(gameOver);
         }
