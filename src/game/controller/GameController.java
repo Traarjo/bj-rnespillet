@@ -184,7 +184,7 @@ public class GameController {
     }
 
     /**
-     * Sletter fil, om det eksisterer en fil fra før.
+     * Sletter fil, hvis det eksisterer en fil fra før.
      */
     private void deleteGameFile()  {
         if(Files.exists(gameDataFile)){
