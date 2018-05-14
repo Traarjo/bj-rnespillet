@@ -39,7 +39,7 @@ public class GameController {
     private Image beeImage;
     private Image honeyImage;
     private Path gameDataFile;
-    private List<HighScore> highScores = new ArrayList<>();
+    /*private List<HighScore> highScores = new ArrayList<>();*/
 
 
 
@@ -300,6 +300,11 @@ public class GameController {
     }
 
     //dele opp denne?
+
+    /**
+     * Funksjonalitet som oppdateres hele tiden.
+     * Viser hvor honning og bier kan legge seg på brettet, hvor mange det kan være, og sier at om man spiser honning/blir stukket av bie, så skal honning/bie forsvinne fra brettet.
+     */
     public  synchronized void updateGameState() {
         if(isGameOver()){
           pause();
@@ -349,6 +354,11 @@ public class GameController {
         }
     }
 
+    /**
+     * Når nytt spill startes, skal en evt. eksisterende fil slettes først.
+     * Bier og honning tømmes fra brettet, og man tegner en ny bjørn.
+     * Så settes spillet i gang, spillet oppdateres. 
+     */
     public void newGame() {
         deleteGameFile();
         if (isGameRunning()){
