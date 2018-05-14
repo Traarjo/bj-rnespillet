@@ -53,7 +53,7 @@ public class Level extends Pane {
         setId("level");
         Canvas canvas = new Canvas(Size.windowwidth, Size.windowheight);
         gc = canvas.getGraphicsContext2D();
-        getChildren().addAll(createTrees(), canvas);
+        getChildren().addAll(canvas);
 
         gameController.getState().addListener((observable, oldValue, currentState) -> {
             if (currentState.equals(GameState.NEW_LEVEL.toString())){
@@ -83,24 +83,6 @@ public class Level extends Pane {
        bearAnimation.start();
 
     }
-
-    private ImageView createTrees2() {
-        ImageView trees = new ImageView("bilder/trees.png");
-        trees.setPickOnBounds(true);
-        trees.setPreserveRatio(true);
-        trees.setFitWidth(2700);
-        return trees;
-    }
-
-    private ImageView createTrees() {
-        ImageView trees1 = new ImageView("bilder/trees.png");
-        ImageView trees2 = new ImageView("bilder/trees.png");
-        gameController.loopTrees(trees1, trees2);
-        return trees1;
-
-
-    }
-
 
     private void render() {
         gc.clearRect(0, 0, Size.windowwidth, Size.windowheight);

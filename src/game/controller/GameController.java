@@ -232,34 +232,6 @@ public class GameController {
         };
     }
 
-    public void loopTrees(ImageView trees1, ImageView trees2) {
-        ParallelTransition parallelTransition;
-
-        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(8000), trees1);
-        trees1.setFitWidth(windowwidth * 2.7);
-        trees1.setFitHeight(windowwidth/3.4);
-        translateTransition.setFromX(0);
-        translateTransition.setToX(-3 * windowwidth);
-        translateTransition.setInterpolator(Interpolator.LINEAR);
-
-        TranslateTransition translateTransition2 = new TranslateTransition(Duration.millis(8000), trees2);
-        trees2.setFitWidth(windowwidth * 2.7);
-        trees2.setFitHeight(windowwidth/3.4);
-        translateTransition2.setFromX(0);
-        translateTransition2.setToX(-3 * windowwidth);
-        translateTransition2.setInterpolator(Interpolator.LINEAR);
-
-
-        parallelTransition = new ParallelTransition(translateTransition/*, translateTransition2*/);
-        parallelTransition.setCycleCount(Animation.INDEFINITE);
-        parallelTransition.play();
-
-       /* if (!isGameRunning()){
-            parallelTransition.stop();
-        }*/
-    }
-
-
     public boolean isGameRunning() {
         return state.get().equals(GameState.RUNNING.toString());
     }
