@@ -1,5 +1,10 @@
 package game.view;
 
+/**
+ * Koden som skal vise listen med High scores.
+ * Ikke ferdig.
+ */
+
 import game.model.HighScore;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

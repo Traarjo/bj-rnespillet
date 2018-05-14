@@ -48,7 +48,6 @@ public class Level extends Pane {
             } else if (currentState.equals(GameState.PAUSED.toString())) {
                 timer.stop();
                 if (gameController.isGameOver()) {
-                    //TODO show scoeboard..
                     /*HBox hBox = new HBox();
                     hBox.setTranslateX(Size.windowwidth / 3);
                     hBox.setTranslateY(Size.windowwidth / 4);
