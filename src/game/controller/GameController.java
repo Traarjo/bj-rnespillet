@@ -1,5 +1,11 @@
 package game.controller;
 
+/**
+ * GameController
+ *
+ *
+ */
+
 import game.model.*;
 import game.view.GameMenu;
 import game.view.Size;
@@ -41,8 +47,13 @@ public class GameController {
     private Path gameDataFile;
     /*private List<HighScore> highScores = new ArrayList<>();*/
 
-
-
+    /**
+     * Setter i gang beeMover() og honeyMover() og sier hvor raskt de skal gå over skjemen.
+     * @param bearImage tar inn bildet av bjørnen
+     * @param beeImage tar inn bildet av bien
+     * @param honeyImage tar inn bildet av honning
+     *
+     */
     public GameController(Image bearImage, Image beeImage, Image honeyImage) {
         this.bearImage = bearImage;
         this.beeImage = beeImage;
@@ -91,7 +102,9 @@ public class GameController {
         System.exit(0);
     }
 
-
+    /**
+     * Henter opp og loader spillet fra filen som er lagret. 
+     */
     public void loadGame(){
         if(canLoadGame()){
             String currentLine;
@@ -138,6 +151,9 @@ public class GameController {
         return Files.exists(gameDataFile);
     }
 
+    /**
+     * Lagrer fil med x og y posisjonen til bjørnen, biene og honningen, samt score og liv.
+     */
     private void saveGameState() {
        if(!isGameOver()){
            try {
@@ -180,6 +196,9 @@ public class GameController {
        }
     }
 
+    /**
+     * Sletter fil, om det eksisterer en fil fra før.
+     */
     private void deleteGameFile()  {
         if(Files.exists(gameDataFile)){
             try {
@@ -299,7 +318,7 @@ public class GameController {
          return bear == null ||  bear.getLives() <= 0;
     }
 
-    //dele opp denne?
+
 
     /**
      * Funksjonalitet som oppdateres hele tiden.
