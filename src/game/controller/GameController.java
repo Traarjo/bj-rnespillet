@@ -3,6 +3,7 @@ package game.controller;
 import game.model.*;
 import game.view.GameMenu;
 import game.view.Size;
+import game.view.Lane;
 
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
@@ -199,6 +200,7 @@ public class GameController {
                         bee.setxPosition(newPosition);
                     } else {
                         bee.setxPosition(windowwidth+beeImage.getWidth());
+                        bee.setyPosition(Lane.randomLane());
                     }
                 });
 
@@ -216,6 +218,7 @@ public class GameController {
                         honey.setxPosition(newPosition);
                     } else {
                         honey.setxPosition(windowwidth+honeyImage.getWidth());
+                        honey.setyPosition(Lane.randomLane());
                     }
                 });
 
@@ -306,30 +309,22 @@ public class GameController {
         else {
             Random random = new Random();
 
-            double lane1 = bear.startPosition() - bear.verticalStepLength();
-            double lane2 = bear.startPosition();
-            double lane3 = bear.startPosition() + bear.verticalStepLength();
-
-
-            List<Integer> xValuesBee = Arrays.asList(20, 200, 350, 500, 650, 770);
-            List<Integer> yValuesBee = Arrays.asList((int)lane1, (int)lane2, (int)lane3);
+            List<Integer> xValue = Arrays.asList(100, 250, 400, 550, 700, 850);
 
             //Bier
-            double xForNewBee = xValuesBee.get(random.nextInt(6))+Size.width();
-            double yForNewBee = yValuesBee.get(random.nextInt(3));
+            double xForNewBee = xValue.get(random.nextInt(6))+Size.width();
 
             if (bees.size() < 3 && bees.stream()
-                    .noneMatch(bee -> bee.getxPosition() == xForNewBee && bee.getyPosition() == yForNewBee)) {
-                bees.add(new Bee(beeImage.getWidth(), beeImage.getHeight(), yForNewBee, xForNewBee));
+                    .noneMatch(bee -> bee.getxPosition() == xForNewBee && bee.getyPosition() == Lane.randomLane())) {
+                bees.add(new Bee(beeImage.getWidth(), beeImage.getHeight(), Lane.randomLane(), xForNewBee));
             }
 
             //Honning
-            double xForNewHoney = xValuesBee.get(random.nextInt(6))+Size.width();
-            double yForNewHoney = yValuesBee.get(random.nextInt(3));
+            double xForNewHoney = xValue.get(random.nextInt(6))+Size.width();
 
             if (honeyPots.size() < 4 && honeyPots.stream()
-                    .noneMatch(honey -> honey.getxPosition() == xForNewHoney && honey.getyPosition() == yForNewHoney)) {
-                honeyPots.add(new Honey(honeyImage.getWidth(), honeyImage.getHeight(), yForNewHoney, xForNewHoney));
+                    .noneMatch(honey -> honey.getxPosition() == xForNewHoney && honey.getyPosition() == Lane.randomLane())) {
+                honeyPots.add(new Honey(honeyImage.getWidth(), honeyImage.getHeight(), Lane.randomLane(), xForNewHoney));
             }
 
            /* List<Honey> eatenHoney = honeyPots.stream().filter(honey -> bear.ateHoney(honey)).collect(Collectors.toList());

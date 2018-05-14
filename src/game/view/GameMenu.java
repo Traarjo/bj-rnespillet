@@ -3,6 +3,7 @@ package game.view;
 import game.controller.GameController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -20,6 +21,8 @@ public class GameMenu {
 
     public GameMenu(GameController gameController, boolean canResumeGame){
         Stage stage = new Stage();
+        stage.setHeight(Size.height()/2);
+        stage.setWidth(Size.width()/2);
         stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Meny");
@@ -43,9 +46,30 @@ public class GameMenu {
             gameController.newGame();
         });
         loadGameButton.setOnAction(event -> {
-            stage.close();
-            gameController.loadGame();
+            try {
+                stage.close();
+                gameController.loadGame();
+            } catch (Exception exception){
+                Stage noFile = new Stage();
+                noFile.setHeight(Size.height()/3);
+                noFile.setWidth(Size.width()/3);
+                noFile.setResizable(false);
+                noFile.initModality(Modality.APPLICATION_MODAL);
+                noFile.setTitle("Ingen fil tilgjengelig");
+                noFile.getIcons().add(new Image("bilder/icon_bear.png"));
 
+                Label text = new Label("Feil ved lasting av fil! \n\n");
+                Label text2= new Label ("Det oppstod en feil \nog vi klarte ikke hente det tidligere lagrede spillet\n\n");
+
+                Button ok = new Button ("Ok");
+                ok.setOnAction(e -> noFile.close());
+
+                VBox vBox = new VBox();
+                vBox.getChildren().addAll(text, text2, ok);
+
+                noFile.setScene(new Scene(vBox));
+                noFile.showAndWait();
+            }
         });
         galleryButton.setOnAction(e -> {
             e.consume();
@@ -60,6 +84,7 @@ public class GameMenu {
             gameController.exit();
         });
         if (canResumeGame){
+            quitButton.setText("Lagre og Avslutt");
             Button continueGameButton = new Button("Fortsett");
             continueGameButton.setOnAction(e -> {
                 e.consume();

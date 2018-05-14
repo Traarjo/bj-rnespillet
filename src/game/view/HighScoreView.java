@@ -18,6 +18,8 @@ public class HighScoreView {
     public HighScoreView(List<HighScore> highScores){
         this.highScores = highScores;
         Stage stage = new Stage();
+        stage.setHeight(Size.height()/2);
+        stage.setWidth(Size.width()/2);
         stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("HighScore");

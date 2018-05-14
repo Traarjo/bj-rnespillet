@@ -56,117 +56,49 @@ public class BearImages {
     public Image getBearImage(int eatenHoney) {
         if (eatenHoney < 10) {
             return bearImage;
-        }
-
-
-        if (eatenHoney >= 10 && eatenHoney < 20) {
-            ;
+        } else if (eatenHoney >= 10 && eatenHoney < 20) {
             return bearImage3;
-
-        }
-
-        if (eatenHoney >= 20 && eatenHoney < 30) {
+        } else if (eatenHoney >= 20 && eatenHoney < 30) {
             return bearImage5;
-
-
-        }
-
-        if (eatenHoney >= 30 && eatenHoney < 40) {
+        } else if (eatenHoney >= 30 && eatenHoney < 40) {
             return bearImage7;
-
-
-        }
-
-        if (eatenHoney >= 40 && eatenHoney < 50) {
+        } else if (eatenHoney >= 40 && eatenHoney < 50) {
             return bearImage9;
-
-
-        }
-
-        if (eatenHoney >= 50 && eatenHoney < 60) {
+        } else if (eatenHoney >= 50 && eatenHoney < 60) {
             return bearImage11;
-
-
-        }
-
-        if (eatenHoney >= 60 && eatenHoney < 70) {
+        } else if (eatenHoney >= 60 && eatenHoney < 70) {
             return bearImage13;
-
-
-        }
-
-        if (eatenHoney >= 70 && eatenHoney < 80) {
+        } else if (eatenHoney >= 70 && eatenHoney < 80) {
             return bearImage15;
-
-
-        }
-
-        if (eatenHoney >= 80 && eatenHoney < 90) {
+        } else if (eatenHoney >= 80 && eatenHoney < 90) {
             return bearImage17;
-
-
-        }
+        } else {
             return bearImage19;
+        }
     }
 
 
     public Image getBearImage2(int eatenHoney) {
         if (eatenHoney < 10) {
             return bearImage2;
-        }
-
-
-        if (eatenHoney >= 10 && eatenHoney < 20) {
-            ;
+        } else if (eatenHoney >= 10 && eatenHoney < 20) {
             return bearImage4;
-
-        }
-
-        if (eatenHoney >= 20 && eatenHoney < 30) {
+        } else if (eatenHoney >= 20 && eatenHoney < 30) {
             return bearImage6;
-
-
-        }
-
-        if (eatenHoney >= 30 && eatenHoney < 40) {
+        } else if (eatenHoney >= 30 && eatenHoney < 40) {
             return bearImage8;
-
-
-        }
-
-        if (eatenHoney >= 40 && eatenHoney < 50) {
+        } else if (eatenHoney >= 40 && eatenHoney < 50) {
             return bearImage10;
-
-
-        }
-
-        if (eatenHoney >= 50 && eatenHoney < 60) {
+        } else if (eatenHoney >= 50 && eatenHoney < 60) {
             return bearImage12;
-
-
-        }
-
-        if (eatenHoney >= 60 && eatenHoney < 70) {
+        } else if (eatenHoney >= 60 && eatenHoney < 70) {
             return bearImage14;
-
-
-        }
-
-        if (eatenHoney >= 70 && eatenHoney < 80) {
+        } else if (eatenHoney >= 70 && eatenHoney < 80) {
             return bearImage16;
-
-
-        }
-
-        if (eatenHoney >= 80 && eatenHoney < 90) {
+        } else if (eatenHoney >= 80 && eatenHoney < 90) {
             return bearImage18;
-
-
+        } else {
+            return bearImage20;
         }
-
-        return bearImage20;
-
-
-
     }
 }
